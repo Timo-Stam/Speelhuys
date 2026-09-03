@@ -3,7 +3,7 @@
 include "../classes/session.php";
 include "../classes/user.php";
 include "../classes/connection.php";
-include "../classes/brand.php";
+include "../classes/theme.php";
 
 // check voor cookie
 if (!isset($_COOKIE["speelhuys-project-cookie"])) {
@@ -14,7 +14,7 @@ $conn = Database::start();
 $session = Session::findSession();
 $userId = $session->userId;
 $user = User::findAdmin($userId);
-$brands = Brand::findAllBrands();
+$themes = Theme::findAllThemes();
 // check om zeker te zijn anders wordt je weggestuurd
 
 if ($session == false) {
@@ -152,25 +152,20 @@ if ($user->role == null) {
                     //einde checks
 
                     //checkt of er wel blogs zijn
-                if ($brands) {
-                    foreach ($brands as $brand) { ?>
+                if ($themes) {
+                    foreach ($themes as $theme) { ?>
                         <div class="col-3 mt-3">
                             <!--maakt een card voor elke blog-->
                             <div class="card mx-auto" style="width: 18rem;">
-                                <div class="embed-responsive embed-responsive-1by1">
-                                    <!-- voor de foto van de blog-->
-                                    <img src="../upload/<?= $brand->image ?>" class="card-img-top embed-responsive-item"
-                                        style="object-fit: cover; height: 18rem;" alt="foto">
-                                </div>
                                 <!-- voor de blog informatie-->
                                 <div class="card-body">
-                                    <h5 class="card-title"><?= $brand->name ?></h5>
+                                    <h5 class="card-title"><?= $theme->name ?></h5>
                                     <!-- de button in de kaart voor de detailpagina-->
-                                    <a href="../user/detailpage.php?id=<?= $brand->id ?>" class="btn btn-primary">Zie blog</a>
+                                    <a href="../user/detailpage.php?id=<?= $theme->id ?>" class="btn btn-primary">Zie blog</a>
                                     <!-- de button in de kaart voor de editpagina-->
-                                    <a href="edit.php?id=<?= $brand->id ?>" class="btn btn-primary">Edit</a>
+                                    <a href="edit.php?id=<?= $theme->id ?>" class="btn btn-primary">Edit</a>
                                     <!-- de button in de kaart voor de deletepagina-->
-                                    <a href="delete.php?id=<?= $brand->id ?>" class="btn btn-primary">Delete</a>
+                                    <a href="delete.php?id=<?= $theme->id ?>" class="btn btn-primary">Delete</a>
                                 </div>
                             </div>
                         </div>

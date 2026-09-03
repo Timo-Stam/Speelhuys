@@ -64,9 +64,9 @@ if (isset($_POST["title"]) && isset($_POST["content"])) {
                 <div class="col">
                     <!--vulling-->
                 </div>
-                <!--begin navbar-->
                 <nav class="navbar navbar-expand-lg bg-body-tertiary border border-black mb-1">
                     <div class="container-fluid">
+                        <!--navbar foto-->
                         <a class="navbar-brand" href="../user/overview.php">
                             <img src="../images/image.png" alt="huis" width="50" height="35">
                         </a>
@@ -82,18 +82,30 @@ if (isset($_POST["title"]) && isset($_POST["content"])) {
                         </div>
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div class="navbar-nav">
-                                <a class="nav-link active" href="insert.php?id=<?= $session->userId ?>" id="navbarBlogMakingPage">
-                                    <h5>maak nieuw blog</h5>
+                                <!-- geeft de userid mee om naar de insert tegaan-->
+                                <a class="nav-link active" id="navbarBlogMakingPage"
+                                    href="insert.php?id=<?= $session->userId ?>">
+                                    <h5>maak nieuw product</h5>
                                 </a>
                             </div>
                         </div>
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <!-- de merk tekst boven aan als button om naar de adminpagina tegaan-->
                             <div class="navbar-nav">
-                                <a class="nav-link active" id="navbarAdminpage" href="admin.php">
-                                    <h5>Admin</h5>
+                                <a class="nav-link active" id="navbarAdminpage" href="brandPage.php">
+                                    <h5>Merk</h5>
                                 </a>
                             </div>
                         </div>
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <!-- de thema tekst boven aan als button om naar de adminpagina tegaan-->
+                            <div class="navbar-nav">
+                                <a class="nav-link active" id="navbarAdminpage" href="themePage.php">
+                                    <h5>Thema</h5>
+                                </a>
+                            </div>
+                        </div>
+                        <!--verwelkomende tekst voor de admin-->
                         <div class="container text-end">
                             <h4> Welkom tot de website admin</h4>
                         </div>
@@ -102,7 +114,7 @@ if (isset($_POST["title"]) && isset($_POST["content"])) {
                         </div>
                     </div>
                 </nav>
-                <!-- eind navbar -->
+                <!--eind navbar-->
                 <div class="col-2">
                     <!-- dit is voor opmaak van de form -->
                 </div>

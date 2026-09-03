@@ -89,7 +89,7 @@
                         setcookie("speelhuys-project-cookie", $key, strtotime("+1 week"), "/");
 
                         //stuurt de admin naar de admin pagina met zijn userid
-                        header("location: admin.php");
+                        header("location: brandPage.php");
                     } else {
                         //voor als er geen gebruiker is gevonden wordt komt deze error bar
                 
