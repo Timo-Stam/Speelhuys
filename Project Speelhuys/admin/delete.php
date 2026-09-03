@@ -34,9 +34,9 @@ if ($user->role == null) {
     exit;
 }
 if (isset($_POST["deleteBtn"])) {
-    $product->deleteProduct();
+    $brand->deleteBrand();
 
-    header("Location: admin.php?delete=true");
+    header("Location: brandPage.php?delete=true");
     exit;
 }
 ?>
@@ -125,18 +125,8 @@ if (isset($_POST["deleteBtn"])) {
                             <tr>
                                 <td>
                                     <!--dit zet de titel van de blog neer-->
-                                    <h2><?= $brand->title ?></h2>
+                                    <h2><?= $brand->name ?></h2>
                                 </td>
-                            <tr>
-                                <td>
-                                    <h5><?= $brand->content ?></h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h5><?= $brand->author ?></h5>
-                                </td>
-                            </tr>
                             <tr>
                                 <td>
                                     <!-- de foto van de blog-->

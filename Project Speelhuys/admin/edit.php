@@ -26,13 +26,13 @@ if ($user->role == null) {
     exit;
 }
 // kijkt of je alles hebt ingevuld als je op de knop drukt
-if (isset($_POST["name"])) {
+if (isset($_POST["title"])) {
     if (!empty($_FILES["file"]["name"])) {
         $brand->image = $_FILES["file"]["name"];
         //verplaats de foto naar upload map
         move_uploaded_file($_FILES["file"]["tmp_name"], "../upload/" . $_FILES["file"]["name"]);
     }
-    //post de naam en foto
+    //post de naam, beschrijving en foto
     ///
     //
     //!
@@ -120,7 +120,7 @@ if (isset($_POST["name"])) {
                 </div>
                 <div class="col-5 mt-3">
 
-                <!-- begin form voor het editen van de blog-->
+                    <!-- begin form voor het editen van de blog-->
                     <form method="POST" action="" enctype="multipart/form-data">
                         <h3>Merk</h3>
                         <!-- vult de informatie van de blog al automatisch in-->
