@@ -21,25 +21,25 @@ if ($user == null) {
     header("Location: index.php?message=Geen gebruiker gevonden.");
     exit;
 }
-if ($user->admin != 1) {
+if ($user->role == null) {
     header("Location: index.php?message=Geen admin.");
     exit;
 }
 // kijkt of je alles hebt ingevuld als je op de knop drukt
-if (isset($_POST["title"]) && isset($_POST["content"])) {
+if (isset($_POST["name"])) {
     if (!empty($_FILES["file"]["name"])) {
         $brand->image = $_FILES["file"]["name"];
         //verplaats de foto naar upload map
         move_uploaded_file($_FILES["file"]["tmp_name"], "../upload/" . $_FILES["file"]["name"]);
     }
-    //post de titel en tekst erin
+    //post de naam en foto
     ///
     //
     //!
     $brand->name = $_POST["name"];
     //update de blog met de nieuwe aanpassingen
     $brand->updateBrand();
-    header("Location: admin.php?update=true");
+    header("Location: brandPage.php?update=true");
     exit;
 
 }
@@ -121,11 +121,10 @@ if (isset($_POST["title"]) && isset($_POST["content"])) {
                 <div class="col-5 mt-3">
 
                 <!-- begin form voor het editen van de blog-->
-                    <h4>Blog</h4>
                     <form method="POST" action="" enctype="multipart/form-data">
-                        <h6>Titel</h6>
+                        <h3>Merk</h3>
                         <!-- vult de informatie van de blog al automatisch in-->
-                        <input class="form-control" type="text" name="title" value="<?= $brand->name ?>" required>
+                        <input class="form-control" type="text" name="name" value="<?= $brand->name ?>" required>
                         <!--  de knop om te editen-->
                         <button type="submit" name="insertPost" class="btn btn-primary">Edit</button>
                 </div>
@@ -144,14 +143,6 @@ if (isset($_POST["title"]) && isset($_POST["content"])) {
                 </div>
             </div>
         </div>
-
-        <!-- de script voor de tekstblok-->
-        <script type="text/javascript" src="https://code.jquery.com/jquery.min.js" charset="utf-8"></script>
-        <script type="text/javascript" src="../js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script>
-            $('.jqte').jqte();
-        </script>
         <div>
             <!-- dit is voor de achtergrond-->
             <?

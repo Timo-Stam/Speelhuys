@@ -1,8 +1,10 @@
 <?
 include "../classes/connection.php";
-include "../classes/product.php";
+include "../classes/brand.php";
+include "../classes/theme.php";
 
 $brands = Brand::findAllBrands();
+$themes = Theme::findAllThemes();
 
 ?>
 <!DOCTYPE html>

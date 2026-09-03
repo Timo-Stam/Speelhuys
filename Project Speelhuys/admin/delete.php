@@ -29,7 +29,7 @@ if ($user == null) {
     header("Location: index.php?message=Geen gebruiker gevonden.");
     exit;
 }
-if ($user->admin != 1) {
+if ($user->role == null) {
     header("Location: index.php?message=Geen admin.");
     exit;
 }

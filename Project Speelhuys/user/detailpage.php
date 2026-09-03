@@ -1,6 +1,7 @@
 <?
 include "../classes/connection.php";
-include "../classes/product.php";
+include "../classes/brand.php";
+include "../classes/theme.php";
 
 //pakt de blog id uit de url
 $brand = Brand::findBrandById($_GET["id"]);

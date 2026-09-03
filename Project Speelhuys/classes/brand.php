@@ -47,7 +47,7 @@ class Brand
 
         //om te zoeken in de database op naam en wachtwoord
         //
-        $query = "SELECT * FROM brand 
+        $query = "SELECT * FROM brands 
         WHERE brand_id = '$id'";
 
         $result = $conn->query($query);
