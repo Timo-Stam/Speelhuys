@@ -160,8 +160,6 @@ if ($user->role == null) {
                                 <!-- voor de blog informatie-->
                                 <div class="card-body">
                                     <h5 class="card-title"><?= $theme->name ?></h5>
-                                    <!-- de button in de kaart voor de detailpagina-->
-                                    <a href="../user/detailpage.php?id=<?= $theme->id ?>" class="btn btn-primary">Zie blog</a>
                                     <!-- de button in de kaart voor de editpagina-->
                                     <a href="edit.php?id=<?= $theme->id ?>" class="btn btn-primary">Edit</a>
                                     <!-- de button in de kaart voor de deletepagina-->

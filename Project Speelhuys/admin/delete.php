@@ -29,8 +29,8 @@ if ($user == null) {
     header("Location: index.php?message=Geen gebruiker gevonden.");
     exit;
 }
-if ($user->role == null) {
-    header("Location: index.php?message=Geen admin.");
+if ($user->role != "admin") {
+    header("Location: brandPage.php?message=Geen admin.");
     exit;
 }
 if (isset($_POST["deleteBtn"])) {
