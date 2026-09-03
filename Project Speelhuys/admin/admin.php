@@ -1,6 +1,6 @@
 <?
 // include alle classes
-//test Urdo
+//test Urdo gezien
 include "../classes/session.php";
 include "../classes/user.php";
 include "../classes/connection.php";
