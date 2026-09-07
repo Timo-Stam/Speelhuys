@@ -13,6 +13,7 @@ $session = Session::findSession();
 $userId = $session->userId;
 $user = User::findAdmin($userId);
 $brand = Brand::findBrandById($_GET["id"]);
+
 // check alles uit de database en als er een fout is stuurt het je terug naar inlog pagina
 if ($session == false) {
     header("location: index.php?Geen session gevonden.");
@@ -26,7 +27,7 @@ if ($user->role == null) {
     exit;
 }
 // kijkt of je alles hebt ingevuld als je op de knop drukt
-if (isset($_POST["title"])) {
+if (isset($_POST["name"])) {
     if (!empty($_FILES["file"]["name"])) {
         $brand->image = $_FILES["file"]["name"];
         //verplaats de foto naar upload map
