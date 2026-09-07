@@ -30,6 +30,7 @@ if ($user->role == null) {
 }
 ?>
 
+<!-- navbar begin -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,16 +69,16 @@ if ($user->role == null) {
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div class="navbar-nav">
                                 <!-- geeft de userid mee om naar de insert tegaan-->
-                                <a class="nav-link active" id="navbarBlogMakingPage"
-                                    href="insert.php?id=<?= $session->userId ?>">
-                                    <h5>maak nieuw product</h5>
+                                <a class="nav-link active" id="navbarSetsPage"
+                                    href="setsPage.php?id=<?= $session->userId ?>">
+                                    <h5>Sets</h5>
                                 </a>
                             </div>
                         </div>
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <!-- de merk tekst boven aan als button om naar de adminpagina tegaan-->
                             <div class="navbar-nav">
-                                <a class="nav-link active" id="navbarAdminpage" href="brandPage.php">
+                                <a class="nav-link active" id="navbarbrandPage" href="brandPage.php">
                                     <h5>Merk</h5>
                                 </a>
                             </div>
@@ -100,7 +101,7 @@ if ($user->role == null) {
                     </div>
                 </nav>
                 <!--eind navbar-->
-            <!-- alle checks voor de contole bars-->
+                <!-- alle checks voor de contole bars-->
                 <!--ckeck om te kijken of je net iets hebt geupdate voor een controle bar-->
                 <?
                 if (isset($_GET["update"])) {
@@ -114,10 +115,25 @@ if ($user->role == null) {
                         </svg>
                         <!--tekst in de bar-->
                         <div>
-                           <p>Uw blog is geupdate</p>
+                            <p>Uw blog is geupdate</p>
                         </div>
                     </div>
-                    <?}
+                <? }
+                //alert check om aantegeven dat je geen admin bent
+                if (isset($_GET["adminCheck"])) {
+                    ?>
+                    <!-- foto in alert wilt niet werken -->
+
+                    <div class="alert alert-warning d-flex align-items-center" role="alert">
+                        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Warning: <symbol id="
+                            exclamation-triangle-fill">
+                            <use xlink:href="#exclamation-triangle-fill" />
+                        </svg>
+                        <div>
+                            <p>U bent geen admin</p>
+                        </div>
+                    </div>
+                <? }
                 // checkt of je net wat hebt gedelete en geeft je confermatie daarvan
                 if (isset($_GET["delete"])) {
                     ?>
@@ -130,12 +146,12 @@ if ($user->role == null) {
                         </svg>
                         <!-- tekst in de controle bar-->
                         <div>
-                           <p>Uw blog is gedelete</p>
+                            <p>Uw blog is gedelete</p>
                         </div>
                     </div>
-                    <?}
+                <? }
                 // checkt of je net wat hebt gedelete en geeft je confermatie daarvan
-                    if (isset($_GET["insert"])) {
+                if (isset($_GET["insert"])) {
                     ?>
                     <div class="alert alert-success d-flex align-items-center" role="alert">
                         <!-- voor het symbol-->
@@ -145,13 +161,20 @@ if ($user->role == null) {
                                 d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                         </svg>
                         <div>
-                           <p>U heeft een blog aangemaakt</p>
+                            <p>U heeft een blog aangemaakt</p>
                         </div>
                     </div>
-                    <?}
-                    //einde checks
+                <? }
+                //einde checks
+                
+                //de link naar het maken van een merk maar het moet nog mooigemaakt worden
+                ?>
+                <a class="nav-link active" href="brandInsert.php?id=<?= $session->userId ?>">
+                    <h5>nieuw merk toevoegen</h5>
+                </a>
+                <?
 
-                    //checkt of er wel blogs zijn
+                //checkt of er wel blogs zijn
                 if ($brands) {
                     foreach ($brands as $brand) { ?>
                         <div class="col-3 mt-3">
@@ -166,9 +189,9 @@ if ($user->role == null) {
                                 <div class="card-body">
                                     <h5 class="card-title"><?= $brand->name ?></h5>
                                     <!-- de button in de kaart voor de editpagina-->
-                                    <a href="edit.php?id=<?= $brand->id ?>" class="btn btn-primary">Edit</a>
+                                    <a href="brandEdit.php?id=<?= $brand->id ?>" class="btn btn-primary">Edit</a>
                                     <!-- de button in de kaart voor de deletepagina-->
-                                    <a href="delete.php?id=<?= $brand->id ?>" class="btn btn-primary">Delete</a>
+                                    <a href="brandDelete.php?id=<?= $brand->id ?>" class="btn btn-primary">Delete</a>
                                 </div>
                             </div>
                         </div>
