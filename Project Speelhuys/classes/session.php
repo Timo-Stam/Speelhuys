@@ -1,4 +1,4 @@
-<?
+<?php
 class Session
 {
     public int $id;

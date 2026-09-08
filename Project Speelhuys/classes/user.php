@@ -1,4 +1,4 @@
-<?
+<?php
 //de user class om de gebruikers te vinden in de database
 //
 class User

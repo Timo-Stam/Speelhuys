@@ -1,4 +1,4 @@
-<?
+<?php
 class Theme
 {
     public int $id;
