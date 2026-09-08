@@ -85,7 +85,7 @@ if (isset($_POST["theme"])) {
                             <div class="navbar-nav">
                                 <!-- geeft de userid mee om naar de insert tegaan-->
                                 <a class="nav-link active" id="navbarSetsPage"
-                                    href="setsPage.php?id=<?= $session->userId ?>">
+                                    href="setPage.php?id=<?= $session->userId ?>">
                                     <h5>Sets</h5>
                                 </a>
                             </div>

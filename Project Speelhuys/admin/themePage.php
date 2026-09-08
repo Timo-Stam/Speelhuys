@@ -69,7 +69,7 @@ if ($user->role == null) {
                             <div class="navbar-nav">
                                 <!-- geeft de userid mee om naar de insert tegaan-->
                                 <a class="nav-link active" id="navbarBlogMakingPage"
-                                    href="setsPage.php?id=<?= $session->userId ?>">
+                                    href="setPage.php?id=<?= $session->userId ?>">
                                     <h5>Sets</h5>
                                 </a>
                             </div>
@@ -170,6 +170,9 @@ if ($user->role == null) {
                 ?>
                 <a class="nav-link active" href="themeInsert.php?id=<?= $session->userId ?>">
                     <h5>nieuw thema toevoegen</h5>
+                </a>
+                <a class="nav-link active" href="setInsert.php?id=<?= $session->userId ?>">
+                    <h5>nieuw them toevoegen</h5>
                 </a>
                 <?
 

@@ -3,12 +3,17 @@
 include "../classes/session.php";
 include "../classes/user.php";
 include "../classes/connection.php";
+include "../classes/set.php";
 include "../classes/brand.php";
+include "../classes/theme.php";
+
 //check voor de cookie
+
 if (!isset($_COOKIE["speelhuys-project-cookie"])) {
     header("location: index.php?message=Geen cookie gevonden.");
 }
 // check of de cookie nog geldig is en kijkt of de user wel een admin is
+
 $session = Session::findSession();
 $user = User::findAdmin($_GET["id"]);
 // check of de cookie en gebruiker wel kloppen en stuurt je anders naar de inlog pagina
@@ -23,8 +28,14 @@ if ($user->role == null) {
     header("Location: index.php?message=Geen admin.");
     exit;
 }
+  
+//vind alle themas en merken voor de dropdown
+$themes = Theme::findAllThemes();
+$brands = Brand::findAllBrands();
+
+
 // kijkt of je alles hebt ingevuld
-if (isset($_POST["brand"])) {
+if (isset($_POST["set"])) {
 
     $image = null;
 
@@ -36,13 +47,13 @@ if (isset($_POST["brand"])) {
         move_uploaded_file($_FILES["file"]["tmp_name"], $target);
     }
     // maakt een nieuwe blog aan om toetevoegen aan de database
-    $brand = new Brand();
-    $brand->name = $_POST["brand"];
-    $brand->image = $image;
+    $set = new Set();
+    $set->name = $_POST["set"];
+    $set->image = $image;
     // voegt de blog aan de database
-    $brand->insertBrand();
+    $set->insertSet();
 
-    header("location: brandPage.php?insert=true");
+    header("location: setPage.php?insert=true");
 }
 
 ?>
@@ -124,9 +135,24 @@ if (isset($_POST["brand"])) {
 
                     <!-- begin form voor de blog maken en daarna toevoegen-->
                     <form method="POST" action="" enctype="multipart/form-data">
-                        <h3>Merk</h3>
-                        <!-- tekst vak voor het merk-->
-                        <input class="form-control" type="text" name="brand" required><br>  
+                        <h3>Naam</h3>
+                        <!-- tekst vak voor de naam-->
+                        <input class="form-control" type="text" name="name" required><br>
+                        <!-- dropdown voor de merken-->
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown button
+                            </button>
+                            <ul class="dropdown-menu">
+            <?php foreach ($brands as $brand): ?>
+                <li><a class="dropdown-item" href="#" data-brand-id="<?= $brand->id ?>"><?= htmlspecialchars($brand->name) ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+                        </div>
+                        <!-- tekst vak voor de naam-->
+                        <input class="form-control" type="text" name="name" required><br>
+                        <!-- tekst vak voor de naam-->
+                        <input class="form-control" type="text" name="name" required><br>
                         <!-- de knop om het merk toetevoegen aan de database-->
                         <button type="submit" name="insertPost" class="btn btn-primary">Submit</button>
                 </div>

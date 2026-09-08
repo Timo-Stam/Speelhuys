@@ -49,8 +49,8 @@ $themes = Theme::findAllThemes();
                         </div>
                     </div>
                 </nav>
-            <!-- eind navbar -->
-                    <? if ($brands) {
+                <!-- eind navbar -->
+                <? if ($brands) {
                     foreach ($brands as $brand) { ?>
                         <div class="col-3 mt-3">
                             <div class="card mx-auto" style="width: 18rem;">
@@ -67,23 +67,22 @@ $themes = Theme::findAllThemes();
                         <br>
                     <? }
                 } ?>
-                
-                
+
             </div>
         </div>
         <div>
-        <!-- dit is voor de achtergrond-->
-        <?
-        $backgroundImage =
-            // De achtergrond foto
-            '../images/sand-2005066_1280.jpg';
-        ?>
-        <style>
-            body {
-                background-image: url('<?php echo $backgroundImage; ?>');
-                background-size: cover;
-            }
-        </style>
+            <!-- dit is voor de achtergrond-->
+            <?
+            $backgroundImage =
+                // De achtergrond foto
+                '../images/sand-2005066_1280.jpg';
+            ?>
+            <style>
+                body {
+                    background-image: url('<?php echo $backgroundImage; ?>');
+                    background-size: cover;
+                }
+            </style>
         </div>
     </body>
 

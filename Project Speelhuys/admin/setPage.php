@@ -1,51 +1,35 @@
 <?
-//include alle classes
+// include alle classes
 include "../classes/session.php";
 include "../classes/user.php";
 include "../classes/connection.php";
-include "../classes/brand.php";
-//check voor cookie
+include "../classes/set.php";
+
+// check voor cookie
 if (!isset($_COOKIE["speelhuys-project-cookie"])) {
-    header("location: index.php?message=Geen cookie gevonden.");
+    header("location: index.php?message=Geen cookie");
 }
-//alles uit de database halen
+// alle gegevens ophalen uit de database
+$conn = Database::start();
 $session = Session::findSession();
 $userId = $session->userId;
 $user = User::findAdmin($userId);
-$brand = Brand::findBrandById($_GET["id"]);
+$set = Set::findAllsets();
+// check om zeker te zijn anders wordt je weggestuurd
 
-// check alles uit de database en als er een fout is stuurt het je terug naar inlog pagina
 if ($session == false) {
-    header("location: index.php?Geen session gevonden.");
+    header("location: index.php?message=Geen sessie");
 }
 if ($user == null) {
-    header("Location: index.php?message=Geen gebruiker gevonden.");
+    header("Location: index.php?message=Geen user");
     exit;
 }
 if ($user->role == null) {
-    header("Location: index.php?message=Geen admin.");
+    header("Location: index.php?message=Geen admin");
     exit;
-}
-// kijkt of je alles hebt ingevuld als je op de knop drukt
-if (isset($_POST["name"])) {
-    if (!empty($_FILES["file"]["name"])) {
-        $brand->image = $_FILES["file"]["name"];
-        //verplaats de foto naar upload map
-        move_uploaded_file($_FILES["file"]["tmp_name"], "../upload/" . $_FILES["file"]["name"]);
-    }
-    //post de naam, beschrijving en foto
-    ///
-    //
-    //!
-    $brand->name = $_POST["name"];
-    //update de blog met de nieuwe aanpassingen
-    $brand->updateBrand();
-    header("Location: brandPage.php?update=true");
-    exit;
-
 }
 ?>
-<!-- navbar begin -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -84,7 +68,7 @@ if (isset($_POST["name"])) {
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div class="navbar-nav">
                                 <!-- geeft de userid mee om naar de insert tegaan-->
-                                <a class="nav-link active" id="navbarSetsPage"
+                                <a class="nav-link active" id="navbarBlogMakingPage"
                                     href="setPage.php?id=<?= $session->userId ?>">
                                     <h5>Sets</h5>
                                 </a>
@@ -93,7 +77,7 @@ if (isset($_POST["name"])) {
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <!-- de merk tekst boven aan als button om naar de adminpagina tegaan-->
                             <div class="navbar-nav">
-                                <a class="nav-link active" id="navbarbrandPage" href="brandPage.php">
+                                <a class="nav-link active" id="navbarAdminpage" href="brandPage.php">
                                     <h5>Merk</h5>
                                 </a>
                             </div>
@@ -116,48 +100,55 @@ if (isset($_POST["name"])) {
                     </div>
                 </nav>
                 <!--eind navbar-->
-                <div class="col-2">
-                    <!-- dit is voor opmaak van de form -->
-                </div>
-                <div class="col-5 mt-3">
-
-                    <!-- begin form voor het editen van de blog-->
-                    <form method="POST" action="" enctype="multipart/form-data">
-                        <h3>Merk</h3>
-                        <!-- vult de informatie van de blog al automatisch in-->
-                        <input class="form-control" type="text" name="name" value="<?= $brand->name ?>" required>
-                        <!--  de knop om te editen-->
-                        <button type="submit" name="insertPost" class="btn btn-primary">Edit</button>
-                </div>
-                <!-- de foto toevengen gedeelte-->
-                <div class="col-1 mt-5">
-                    <h6>Voeg hier uw foto toe.</h6>
-                    <input type="file" name="file" class="form-control-file" /><br><br>
-                    <!-- pakt de foto uit upload map-->
-                    <img src="../upload/<?= $brand->image ?>"
-                        style="max-width: 350px; max-height: 350px; display: block;">
-                    <br><br>
-                    </form>
-                </div>
-                <div class="col-2">
-                    <!--vulling voor de form om het goed in het midden te behouden-->
-                </div>
-            </div>
-        </div>
-        <div>
-            <!-- dit is voor de achtergrond-->
-            <?
-            $backgroundImage =
-                // de achtergrond foto
-                '../images/kavowo-paper-3155438.jpg';
-            ?>
-            <style>
-                body {
-                    background-image: url('<?php echo $backgroundImage; ?>');
-                    background-size: cover;
-                }
-            </style>
-        </div>
-    </body>
-
-</html>
+                <!-- alle checks voor de contole bars-->
+                <!--ckeck om te kijken of je net iets hebt geupdate voor een controle bar-->
+                <?
+                if (isset($_GET["update"])) {
+                    ?>
+                    <div class="alert alert-success d-flex align-items-center" role="alert">
+                        <!-- voor het symbol-->
+                        <svg class="bi flex-shrink-0 me-2 " role="img" aria-label="Success: <symbol id=" check-circle-fill"
+                            viewBox="0 0 16 16" width="50" height="35">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                        </svg>
+                        <!--tekst in de bar-->
+                        <div>
+                            <p>Uw blog is geupdate</p>
+                        </div>
+                    </div>
+                <? }
+                
+                 
+                // checkt of je net wat hebt gedelete en geeft je confermatie daarvan
+                if (isset($_GET["delete"])) {
+                    ?>
+                    <div class="alert alert-success d-flex align-items-center" role="alert">
+                        <!-- voor het symbol-->
+                        <svg class="bi flex-shrink-0 me-2 " role="img" aria-label="Success: <symbol id=" check-circle-fill"
+                            viewBox="0 0 16 16" width="50" height="35">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                        </svg>
+                        <!-- tekst in de controle bar-->
+                        <div>
+                            <p>Uw blog is gedelete</p>
+                        </div>
+                    </div>
+                <? }
+                // checkt of je net wat hebt gedelete en geeft je confermatie daarvan
+                if (isset($_GET["insert"])) {
+                    ?>
+                    <div class="alert alert-success d-flex align-items-center" role="alert">
+                        <!-- voor het symbol-->
+                        <svg class="bi flex-shrink-0 me-2 " role="img" aria-label="Success: <symbol id=" check-circle-fill"
+                            viewBox="0 0 16 16" width="50" height="35">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                        </svg>
+                        <div>
+                            <p>U heeft een blog aangemaakt</p>
+                        </div>
+                    </div>
+                <? }
+                //einde checks

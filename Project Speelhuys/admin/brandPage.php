@@ -70,7 +70,7 @@ if ($user->role == null) {
                             <div class="navbar-nav">
                                 <!-- geeft de userid mee om naar de insert tegaan-->
                                 <a class="nav-link active" id="navbarSetsPage"
-                                    href="setsPage.php?id=<?= $session->userId ?>">
+                                    href="setPage.php?id=<?= $session->userId ?>">
                                     <h5>Sets</h5>
                                 </a>
                             </div>
@@ -183,7 +183,7 @@ if ($user->role == null) {
                                 <div class="embed-responsive embed-responsive-1by1">
                                     <!-- voor de foto van de blog-->
                                     <img src="../upload/<?= $brand->image ?>" class="card-img-top embed-responsive-item"
-                                        style="object-fit: cover; height: 18rem;" alt="foto">
+                                        style="object-fit: fill; height: 18rem;" alt="foto">
                                 </div>
                                 <!-- voor de blog informatie-->
                                 <div class="card-body">
