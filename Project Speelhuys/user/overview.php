@@ -170,7 +170,7 @@ $result = $stmt->get_result();
             <div class="embed-responsive embed-responsive-1by1">
                 <img src="../upload/<?= $row['set_image'] ?>"
                     class="card-img-top embed-responsive-item"
-                    style="object-fit: cover; height: 18rem;"
+                    style="object-fit: contain; height: 18rem;"
                     alt="<?= $row['set_name'] ?>">
             </div>
 
