@@ -200,18 +200,18 @@ $result = $stmt->get_result();
             </div>
         </div>
         <div>
-            <!-- dit is voor de achtergrond-->
-            <?
-            $backgroundImage =
-                // De achtergrond foto
-                '../images/sand-2005066_1280.jpg';
-            ?>
-            <style>
-                body {
-                    background-image: url('<?php echo $backgroundImage; ?>');
-                    background-size: cover;
-                }
-            </style>
+                <!-- dit is voor de achtergrond-->
+                <?
+                $backgroundImage =
+                    // De achtergrond foto
+                    '../images/sand-2005066_1280.jpg';
+                ?>
+                <style>
+                    body {
+                        background-image: url('<?php echo $backgroundImage; ?>');
+                        background-size: cover;
+                    }
+                </style>
         </div>
     </body>
 

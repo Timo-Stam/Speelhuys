@@ -3,7 +3,7 @@
 include "../classes/session.php";
 include "../classes/user.php";
 include "../classes/connection.php";
-include "../classes/theme.php";
+include "../classes/set.php";
 
 // check voor cookie
 if (!isset($_COOKIE["speelhuys-project-cookie"])) {
@@ -14,7 +14,7 @@ $conn = Database::start();
 $session = Session::findSession();
 $userId = $session->userId;
 $user = User::findAdmin($userId);
-$themes = Theme::findAllThemes();
+$set = Set::findAllsets();
 // check om zeker te zijn anders wordt je weggestuurd
 
 if ($session == false) {
@@ -118,21 +118,8 @@ if ($user->role == null) {
                         </div>
                     </div>
                 <? }
-                //alert check om aantegeven dat je geen admin bent
-                if (isset($_GET["adminCheck"])) {
-                    ?>
-                    <!-- foto in alert wilt niet werken -->
-
-                    <div class="alert alert-warning d-flex align-items-center" role="alert">
-                        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Warning: <symbol id="
-                            exclamation-triangle-fill">
-                            <use xlink:href="#exclamation-triangle-fill" />
-                        </svg>
-                        <div>
-                            <p>U bent geen admin</p>
-                        </div>
-                    </div>
-                <? }
+                
+                 
                 // checkt of je net wat hebt gedelete en geeft je confermatie daarvan
                 if (isset($_GET["delete"])) {
                     ?>
@@ -165,53 +152,3 @@ if ($user->role == null) {
                     </div>
                 <? }
                 //einde checks
-                
-                //de link naar het maken van een thema maar het moet nog mooigemaakt worden
-                ?>
-                <a class="nav-link active" href="themeInsert.php?id=<?= $session->userId ?>">
-                    <h5>nieuw thema toevoegen</h5>
-                </a>
-                <a class="nav-link active" href="setInsert.php?id=<?= $session->userId ?>">
-                    <h5>nieuw them toevoegen</h5>
-                </a>
-                <?
-
-                //checkt of er wel blogs zijn
-                if ($themes) {
-                    foreach ($themes as $theme) { ?>
-                        <div class="col-3 mt-3">
-                            <!--maakt een card voor elke blog-->
-                            <div class="card mx-auto" style="width: 18rem;">
-                                <!-- voor de blog informatie-->
-                                <div class="card-body">
-                                    <h5 class="card-title"><?= $theme->name ?></h5>
-                                    <!-- de button in de kaart voor de editpagina-->
-                                    <a href="themeEdit.php?id=<?= $theme->id ?>" class="btn btn-primary">Edit</a>
-                                    <!-- de button in de kaart voor de deletepagina-->
-                                    <a href="themeDelete.php?id=<?= $theme->id ?>" class="btn btn-primary">Delete</a>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                    <? }
-                } ?>
-            </div>
-        </div>
-</div>
-<div>
-    <!-- dit is voor de achtergrond-->
-    <?
-    $backgroundImage =
-        // De achtergrond foto
-        '../images/sand-2005066_1280.jpg';
-    ?>
-    <style>
-        body {
-            background-image: url('<?php echo $backgroundImage; ?>');
-            background-size: cover;
-        }
-    </style>
-</div>
-</body>
-
-</html>

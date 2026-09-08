@@ -116,7 +116,7 @@ class Brand
     public function deleteBrand()
     {
         $conn = Database::start();
-        
+
         $id = mysqli_real_escape_string($conn, $this->id);
 
         $sql = "

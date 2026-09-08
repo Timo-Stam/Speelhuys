@@ -45,7 +45,7 @@ class Theme
 
         //om te zoeken in de database op naam en wachtwoord
         //
-        $query = "SELECT * FROM theme 
+        $query = "SELECT * FROM themes 
         WHERE theme_id = '$id'";
 
         $result = $conn->query($query);
@@ -71,7 +71,7 @@ class Theme
         }
     }
     // de functie om de blog te updaten
-    public function updateBrand()
+    public function updateTheme()
     {
         //connectie met de database
         $conn = Database::start();
@@ -83,14 +83,14 @@ class Theme
         UPDATE 
             themes
          SET
-            brand_name = '" . $name . "'
+            theme_name = '" . $name . "'
         WHERE
             theme_id = " . $id . "
         ";
         $conn->query($sql);
         $conn->close();
     }
-    public function insertBrand()
+    public function insertTheme()
     {
         $conn = Database::start();
 
@@ -105,7 +105,7 @@ class Theme
         $conn->query($sql);
         $conn->close();
     }
-    public function deleteBrand()
+    public function deleteTheme()
     {
         $conn = Database::start();
         

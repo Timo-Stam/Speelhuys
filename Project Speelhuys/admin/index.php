@@ -18,7 +18,6 @@
                 <div class="col">
                     <!--vulling-->
                 </div>
-
                 <!-- begin van de navbar-->
                 <nav class="navbar navbar-expand-lg bg-body-tertiary border border-black mb-1">
                     <div class="container-fluid">
