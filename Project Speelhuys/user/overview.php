@@ -13,7 +13,21 @@ $thema = $_GET['thema'] ?? '';
 $prijs = $_GET['prijs'] ?? '';
 $leeftijd = $_GET['leeftijd'] ?? '';
 
-$sets = Set::search($keywords, $merk, $thema, $prijs, $leeftijd);
+$perPagina = 8;
+$pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+$startPagina = ($pagina - 1) * $perPagina;
+
+$sets = Set::search($keywords, $merk, $thema, $prijs, $leeftijd, $perPagina, $startPagina);
+
+$totalResults = Set::searchCount(
+    $keywords,
+    $merk,
+    $thema,
+    $leeftijd
+);
+
+$totalPages = ceil($totalResults / $perPagina);
+
 ?>
 
 <!DOCTYPE html>
@@ -137,14 +151,71 @@ $sets = Set::search($keywords, $merk, $thema, $prijs, $leeftijd);
         </div>
     </div>
 
-<?php } ?>
 
-
-            </div>
-        </div>
-        <div>
+    
+    <?php } ?>
+    
+    <nav>
+    <ul class="pagination justify-content-center">
+    
+        <?php if ($pagina > 1) { ?>
+            <li class="page-item">
+                <a class="page-link"
+                   href="?<?= http_build_query([
+                       'keywords' => $keywords,
+                       'merk' => $merk,
+                       'thema' => $thema,
+                       'prijs' => $prijs,
+                       'leeftijd' => $leeftijd,
+                       'pagina' => $pagina - 1
+                   ]) ?>">
+                    Vorige
+                </a>
+            </li>
+        <?php } ?>
+    
+        <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
+    
+            <li class="page-item <?= $i == $pagina ? 'active' : '' ?>">
+                <a class="page-link"
+                   href="?<?= http_build_query([
+                       'keywords' => $keywords,
+                       'merk' => $merk,
+                       'thema' => $thema,
+                       'prijs' => $prijs,
+                       'leeftijd' => $leeftijd,
+                       'pagina' => $i
+                   ]) ?>">
+                    <?= $i ?>
+                </a>
+            </li>
+    
+        <?php } ?>
+    
+        <?php if ($pagina < $totalPages) { ?>
+            <li class="page-item">
+                <a class="page-link"
+                   href="?<?= http_build_query([
+                       'keywords' => $keywords,
+                       'merk' => $merk,
+                       'thema' => $thema,
+                       'prijs' => $prijs,
+                       'leeftijd' => $leeftijd,
+                       'pagina' => $pagina + 1
+                   ]) ?>">
+                    Volgende
+                </a>
+            </li>
+        <?php } ?>
+    
+    </ul>
+    </nav>
+    
+</div>
+</div>
+<div>
                 <!-- dit is voor de achtergrond-->
-                <?
+                <?php
                 $backgroundImage =
                     // De achtergrond foto
                     '../images/sand-2005066_1280.jpg';
