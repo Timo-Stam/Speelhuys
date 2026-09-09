@@ -2,11 +2,10 @@
 require_once "../classes/connection.php";
 require_once "../classes/brand.php";
 require_once "../classes/theme.php";
+require_once "../classes/set.php";
 
 $brands = Brand::findAllBrands();
 $themes = Theme::findAllThemes();
-
-$db = Database::start();
 
 $keywords = $_GET['keywords'] ?? '';
 $merk = $_GET['merk'] ?? '';
@@ -14,63 +13,7 @@ $thema = $_GET['thema'] ?? '';
 $prijs = $_GET['prijs'] ?? '';
 $leeftijd = $_GET['leeftijd'] ?? '';
 
-$sql = "SELECT sets.*
-FROM sets
-JOIN brands ON sets.set_brand_id = brands.brand_id
-LEFT JOIN themes on sets.set_theme_id = themes.theme_id
-WHERE sets.set_name LIKE ?";
-
-$search = "%" . $keywords . "%";
-
-$params = [$search];
-$types = "s";
-if ($merk !== '') {
-    $sql .= " AND brands.brand_name = ?";
-    $params[] = $merk;
-    $types .= "s";
-}
-if ($thema !== '') {
-    $sql .= " AND themes.theme_name = ?";
-    $params[] = $thema;
-    $types .= "s";
-}
-
-
-if ($leeftijd === '0-3') {
-    $sql .= " AND sets.set_age BETWEEN 0 AND 3";
-    }
-    if ($leeftijd === '4-6') {
-    $sql .= " AND sets.set_age BETWEEN 4 AND 6";
-}
-if ($leeftijd === '7-9') {
-    $sql .= " AND sets.set_age BETWEEN 7 AND 9";
-    }
-    if ($leeftijd === '10-12') {
-        $sql .= " AND sets.set_age BETWEEN 10 AND 12";
-        }
-        if ($leeftijd === '13+') {
-            $sql .= " AND sets.set_age >= 13";
-            }
-            
-if ($prijs === 'laag') {
-      $sql .= " ORDER BY sets.set_price ASC";
- }
- if ($prijs === 'hoog') {
-    $sql .= " ORDER BY sets.set_price DESC";
- }
-
- $stmt = $db->prepare($sql);
-
-$bindParams = [$types];
-
-foreach ($params as $key => $value) {
-    $bindParams[] = &$params[$key];
-}
-
-call_user_func_array([$stmt, 'bind_param'], $bindParams);
-
-$stmt->execute();
-$result = $stmt->get_result();
+$sets = Set::search($keywords, $merk, $thema, $prijs, $leeftijd);
 ?>
 
 <!DOCTYPE html>
@@ -162,30 +105,30 @@ $result = $stmt->get_result();
                 </form>
 
 
-                <?php while ($row = $result->fetch_assoc()) { ?>
+                <?php foreach ($sets as $set) { ?>
 
     <div class="col-3 mt-3">
         <div class="card mx-auto h-100" style="width: 18rem min height: 500px;">
 
             <div class="embed-responsive embed-responsive-1by1">
-                <img src="../upload/<?= $row['set_image'] ?>"
+                <img src="../upload/<?= $set->image ?>"
                     class="card-img-top embed-responsive-item"
                     style="object-fit: contain; height: 18rem;"
-                    alt="<?= $row['set_name'] ?>">
+                    alt="<?= $set->name ?>">
             </div>
 
             <div class="card-body d-flex flex-column">
-                <h5 class="card-title"><?= $row['set_name'] ?></h5>
+                <h5 class="card-title"><?= $set->name ?></h5>
 
                 <p class="card-text" style="height:90px; overflow: hidden;">
-                    <?= $row['set_description'] ?>
+                    <?= $set->description ?>
                 </p>
 
                 <p class="card-text">
-                    €<?= $row['set_price'] ?>
+                    €<?= $set->price ?>
                 </p>
 
-                <a href="../user/detailpage.php?id=<?= $row['set_id'] ?>"
+                <a href="../user/detailpage.php?id=<?= $set->id ?>"
                     class="btn btn-primary mt-auto">
                     Bekijk product
                 </a>
