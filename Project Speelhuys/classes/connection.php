@@ -1,11 +1,11 @@
-<?
+<?php
 class Database
 {
     public static function start()
     {
         $dbServername = "127.0.0.1";
         $dbUser = "root";
-        $dbPassword = "mysql";
+        $dbPassword = "";
         $dbDatabase = "Speelhuys";
 
         $conn = new mysqli($dbServername, $dbUser, $dbPassword, $dbDatabase);
