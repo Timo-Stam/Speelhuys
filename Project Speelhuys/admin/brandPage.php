@@ -103,8 +103,8 @@ if ($user->role == null) {
                 <!--eind navbar-->
                 <!-- alle checks voor de contole bars-->
                 <!--ckeck om te kijken of je net iets hebt geupdate voor een controle bar-->
-                <?
-                if (isset($_GET["update"])) {
+                <?php
+                if (isset($_GET["update"])) 
                     ?>
                     <div class="alert alert-success d-flex align-items-center" role="alert">
                         <!-- voor het symbol-->
@@ -118,7 +118,7 @@ if ($user->role == null) {
                             <p>Uw blog is geupdate</p>
                         </div>
                     </div>
-                <?php }
+                <?php 
                 //alert check om aantegeven dat je geen admin bent
                 if (isset($_GET["adminCheck"])) {
                     ?>
@@ -133,7 +133,7 @@ if ($user->role == null) {
                             <p>U bent geen admin</p>
                         </div>
                     </div>
-                <? }
+                <?php }
                 // checkt of je net wat hebt gedelete en geeft je confermatie daarvan
                 if (isset($_GET["delete"])) {
                     ?>

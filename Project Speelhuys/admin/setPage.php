@@ -149,6 +149,6 @@ if ($user->role == null) {
                         <div>
                             <p>U heeft een blog aangemaakt</p>
                         </div>
-                    </div>
-                <? }
+                    </div> 
+                <?php }
                 //einde checks
