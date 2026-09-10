@@ -28,7 +28,7 @@ if ($user->role == null) {
     header("Location: index.php?message=Geen admin.");
     exit;
 }
-  
+
 //vind alle themas en merken voor de dropdown
 $themes = Theme::findAllThemes();
 $brands = Brand::findAllBrands();
@@ -139,16 +139,12 @@ if (isset($_POST["set"])) {
                         <!-- tekst vak voor de naam-->
                         <input class="form-control" type="text" name="name" required><br>
                         <!-- dropdown voor de merken-->
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown button
-                            </button>
-                            <ul class="dropdown-menu">
-            <?php foreach ($brands as $brand): ?>
-                <li><a class="dropdown-item" href="#" data-brand-id="<?= $brand->id ?>"><?= htmlspecialchars($brand->name) ?></a></li>
-            <?php endforeach; ?>
-        </ul>
-                        </div>
+                        <select class="form-select" aria-label="Default select example" required>
+                            <option selected>Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
                         <!-- tekst vak voor de naam-->
                         <input class="form-control" type="text" name="name" required><br>
                         <!-- tekst vak voor de naam-->
@@ -170,7 +166,7 @@ if (isset($_POST["set"])) {
         </div>
         <div>
             <!-- dit is voor de achtergrond-->
-            <?
+            <?php
             $backgroundImage =
                 // de achtergrond foto
                 '../images/kavowo-paper-3155438.jpg';
@@ -182,6 +178,10 @@ if (isset($_POST["set"])) {
                 }
             </style>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"></script>
+
     </body>
 
 </html>
