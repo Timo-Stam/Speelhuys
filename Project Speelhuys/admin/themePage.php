@@ -1,4 +1,4 @@
-<?
+<?php
 // include alle classes
 include "../classes/session.php";
 include "../classes/user.php";
@@ -102,7 +102,7 @@ if ($user->role == null) {
                 <!--eind navbar-->
                 <!-- alle checks voor de contole bars-->
                 <!--ckeck om te kijken of je net iets hebt geupdate voor een controle bar-->
-                <?
+                <?php
                 if (isset($_GET["update"])) {
                     ?>
                     <div class="alert alert-success d-flex align-items-center" role="alert">
@@ -117,7 +117,7 @@ if ($user->role == null) {
                             <p>Uw blog is geupdate</p>
                         </div>
                     </div>
-                <? }
+                <?php }
                 //alert check om aantegeven dat je geen admin bent
                 if (isset($_GET["adminCheck"])) {
                     ?>
@@ -132,7 +132,7 @@ if ($user->role == null) {
                             <p>U bent geen admin</p>
                         </div>
                     </div>
-                <? }
+                <?php }
                 // checkt of je net wat hebt gedelete en geeft je confermatie daarvan
                 if (isset($_GET["delete"])) {
                     ?>
@@ -148,7 +148,7 @@ if ($user->role == null) {
                             <p>Uw blog is gedelete</p>
                         </div>
                     </div>
-                <? }
+                <?php }
                 // checkt of je net wat hebt gedelete en geeft je confermatie daarvan
                 if (isset($_GET["insert"])) {
                     ?>
@@ -163,7 +163,7 @@ if ($user->role == null) {
                             <p>U heeft een blog aangemaakt</p>
                         </div>
                     </div>
-                <? }
+                <?php }
                 //einde checks
                 
                 //de link naar het maken van een thema maar het moet nog mooigemaakt worden
@@ -174,7 +174,7 @@ if ($user->role == null) {
                 <a class="nav-link active" href="setInsert.php?id=<?= $session->userId ?>">
                     <h5>nieuw them toevoegen</h5>
                 </a>
-                <?
+                <?php
 
                 //checkt of er wel blogs zijn
                 if ($themes) {
@@ -193,14 +193,14 @@ if ($user->role == null) {
                             </div>
                         </div>
                         <br>
-                    <? }
+                    <?php }
                 } ?>
             </div>
         </div>
 </div>
 <div>
     <!-- dit is voor de achtergrond-->
-    <?
+    <?php
     $backgroundImage =
         // De achtergrond foto
         '../images/sand-2005066_1280.jpg';

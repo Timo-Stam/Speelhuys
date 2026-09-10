@@ -1,4 +1,4 @@
-<?
+<?php
 include "../classes/connection.php";
 include "../classes/brand.php";
 
@@ -54,7 +54,7 @@ if ($brand == null) {
                 </nav>
                 <!-- eind navbar -->
                 <!--check voor of er een blog is-->
-                <? if ($brand) { ?>
+                <?php if ($brand) { ?>
                     <div class="col-4">
                         <!-- dit is opmaak voor de bard met infomatie zodat het in het midden is-->
                     </div>
@@ -88,12 +88,12 @@ if ($brand == null) {
                             </tr>
                         </table>
                     </div>
-                <? } ?>
+                <?php } ?>
             </div>
         </div>
         <div>
             <!-- dit is voor de achtergrond-->
-            <?
+            <?php
             $backgroundImage =
                 // de achtergrond foto
                 '../images/kavowo-paper-3155438.jpg';
