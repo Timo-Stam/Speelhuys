@@ -1,4 +1,4 @@
-<?
+<?php
 // include alle classes
 include "../classes/session.php";
 include "../classes/user.php";
@@ -118,7 +118,7 @@ if ($user->role == null) {
                             <p>Uw blog is geupdate</p>
                         </div>
                     </div>
-                <? }
+                <?php }
                 //alert check om aantegeven dat je geen admin bent
                 if (isset($_GET["adminCheck"])) {
                     ?>
@@ -149,7 +149,7 @@ if ($user->role == null) {
                             <p>Uw blog is gedelete</p>
                         </div>
                     </div>
-                <? }
+                <?php }
                 // checkt of je net wat hebt gedelete en geeft je confermatie daarvan
                 if (isset($_GET["insert"])) {
                     ?>
@@ -164,7 +164,7 @@ if ($user->role == null) {
                             <p>U heeft een blog aangemaakt</p>
                         </div>
                     </div>
-                <? }
+                <?php }
                 //einde checks
                 
                 //de link naar het maken van een merk maar het moet nog mooigemaakt worden
@@ -172,7 +172,7 @@ if ($user->role == null) {
                 <a class="nav-link active" href="brandInsert.php?id=<?= $session->userId ?>">
                     <h5>nieuw merk toevoegen</h5>
                 </a>
-                <?
+                <?php
 
                 //checkt of er wel blogs zijn
                 if ($brands) {
@@ -196,14 +196,14 @@ if ($user->role == null) {
                             </div>
                         </div>
                         <br>
-                    <? }
+                    <?php }
                 } ?>
             </div>
         </div>
 </div>
 <div>
     <!-- dit is voor de achtergrond-->
-    <?
+    <?php
     $backgroundImage =
         // De achtergrond foto
         '../images/sand-2005066_1280.jpg';

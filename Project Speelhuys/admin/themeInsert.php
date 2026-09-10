@@ -1,4 +1,4 @@
-<?
+<?php
 //include alle classes
 include "../classes/session.php";
 include "../classes/user.php";
@@ -136,7 +136,7 @@ if (isset($_POST["theme"])) {
         </div>
         <div>
             <!-- dit is voor de achtergrond-->
-            <?
+            <?php
             $backgroundImage =
                 // de achtergrond foto
                 '../images/kavowo-paper-3155438.jpg';

@@ -1,4 +1,4 @@
-<?
+<?php
 // include alle classes
 include "../classes/session.php";
 include "../classes/user.php";
@@ -102,7 +102,7 @@ if ($user->role == null) {
                 <!--eind navbar-->
                 <!-- alle checks voor de contole bars-->
                 <!--ckeck om te kijken of je net iets hebt geupdate voor een controle bar-->
-                <?
+                <?php
                 if (isset($_GET["update"])) {
                     ?>
                     <div class="alert alert-success d-flex align-items-center" role="alert">
@@ -117,7 +117,7 @@ if ($user->role == null) {
                             <p>Uw blog is geupdate</p>
                         </div>
                     </div>
-                <? }
+                <?php }
                 
                  
                 // checkt of je net wat hebt gedelete en geeft je confermatie daarvan
@@ -135,7 +135,7 @@ if ($user->role == null) {
                             <p>Uw blog is gedelete</p>
                         </div>
                     </div>
-                <? }
+                <?php }
                 // checkt of je net wat hebt gedelete en geeft je confermatie daarvan
                 if (isset($_GET["insert"])) {
                     ?>
