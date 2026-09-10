@@ -1,4 +1,4 @@
-<?
+<?php
 //include alle classes
 include "../classes/session.php";
 include "../classes/user.php";
@@ -112,7 +112,7 @@ if (isset($_POST["deleteBtn"])) {
                 </nav>
                 <!--eind navbar-->
                 <!-- dit is de blog met nog een 2de check of er wel een blog bestaat-->
-                <? if ($brand) { ?>
+                <?php if ($brand) { ?>
                     <div class="col-4">
                         <!-- dit is opmaak voor de bard met infomatie zodat het in het midden is-->
                     </div>
@@ -153,7 +153,7 @@ if (isset($_POST["deleteBtn"])) {
         </div>
         <div>
             <!-- dit is voor de achtergrond-->
-            <?
+            <?php
             $backgroundImage =
                 // de achtergrond foto
                 '../images/kavowo-paper-3155438.jpg';

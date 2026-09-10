@@ -1,4 +1,4 @@
-<?
+<?php
 //include alle classes
 include "../classes/session.php";
 include "../classes/user.php";

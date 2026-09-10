@@ -49,7 +49,7 @@
                 <!--einde navbar-->
                 <!--begin van de php code-->
 
-                <?
+                <?php
                 //kijkt op je op de gebruiker knop drukt en stuurt je dan naar de gebruikers overview voor de blogs
                 if (isset($_POST["userBtn"])) {
                     header("location: ../user/overview.php");
@@ -105,7 +105,7 @@
                                 <p>Incorecte inloggegevens probeer het opnieuw</p>
                             </div>
                         </div>
-                        <?
+                        <?php
                     }
                 } elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // error voor als er niks wordt ingevuld
@@ -121,7 +121,7 @@
                             <p>Vul uw inloggegevens allemaal in AUB</p>
                         </div>
                     </div>
-                    <?
+                    <?php
                 }
                 ?>
                 <!--eind fout code bar -->
@@ -163,7 +163,7 @@
         </div>
         <div>
         <!-- dit is voor de achtergrond-->
-        <?
+        <?php
         $backgroundImage =
             // De achtergrond foto
             '../images/sand-2005066_1280.jpg';
