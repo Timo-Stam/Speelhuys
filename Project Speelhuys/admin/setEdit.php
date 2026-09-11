@@ -4,19 +4,17 @@ include "../classes/session.php";
 include "../classes/user.php";
 include "../classes/connection.php";
 include "../classes/set.php";
-include "../classes/brand.php";
-include "../classes/theme.php";
-
-//check voor de cookie
-
+//check voor cookie
 if (!isset($_COOKIE["speelhuys-project-cookie"])) {
     header("location: index.php?message=Geen cookie gevonden.");
 }
-// check of de cookie nog geldig is en kijkt of de user wel een admin is
-
+//alles uit de database halen
 $session = Session::findSession();
-$user = User::findAdmin($_GET["id"]);
-// check of de cookie en gebruiker wel kloppen en stuurt je anders naar de inlog pagina
+$userId = $session->userId;
+$user = User::findAdmin($userId);
+$set = Set::findsetById($_GET["id"]);
+
+// check alles uit de database en als er een fout is stuurt het je terug naar inlog pagina
 if ($session == false) {
     header("location: index.php?Geen session gevonden.");
 }
@@ -28,40 +26,24 @@ if ($user->role == null) {
     header("Location: index.php?message=Geen admin.");
     exit;
 }
-
-//vind alle themas en merken voor de dropdown
-$themes = Theme::findAllThemes();
-$brands = Brand::findAllBrands();
-
-// kijkt of je alles hebt ingevuld
-if (isset($_POST["insertPost"])) {
-
-    $image = null;
-
+// kijkt of je alles hebt ingevuld als je op de knop drukt
+if (isset($_POST["name"])) {
     if (!empty($_FILES["file"]["name"])) {
-        $image = $_FILES["file"]["name"];
-        // zegt dat de foto naar de upload file moet
-        $target = "../upload/" . basename($image);
-        // verzet de foto naar de upload file
-        move_uploaded_file($_FILES["file"]["tmp_name"], $target);
+        $set->image = $_FILES["file"]["name"];
+        //verplaats de foto naar upload map
+        move_uploaded_file($_FILES["file"]["tmp_name"], "../upload/" . $_FILES["file"]["name"]);
     }
-    // maakt een nieuwe blog aan om toetevoegen aan de database
-    $set = new Set();
+    //post de naam, beschrijving en foto
+    ///
+    //
+    //!
     $set->name = $_POST["name"];
-    $set->description = $_POST["description"];
-    $set->brandId = $_POST["brand"];
-    $set->themeId = $_POST["theme"];
-    $set->price = $_POST["price"];
-    $set->age = $_POST["age"];
-    $set->pieces = $_POST["pieces"];
-    $set->stock = $_POST["stock"];
-    $set->image = $image;
-    // voegt de blog aan de database
-    $set->insertSet();
+    //update de blog met de nieuwe aanpassingen
+    $set->updateSet();
+    header("Location: setPage.php?update=true");
+    exit;
 
-    header("location: setPage.php?insert=true");
 }
-
 ?>
 <!-- navbar begin -->
 <!DOCTYPE html>
@@ -86,7 +68,7 @@ if (isset($_POST["insertPost"])) {
                 <nav class="navbar navbar-expand-lg bg-body-tertiary border border-black mb-1">
                     <div class="container-fluid">
                         <!--navbar foto-->
-                        <a class="navbar-home" href="../user/overview.php">
+                        <a class="navbar-brand" href="../user/overview.php">
                             <img src="../images/image.png" alt="huis" width="50" height="35">
                         </a>
                         <button class="navbar-toggler" type="button">
@@ -139,57 +121,21 @@ if (isset($_POST["insertPost"])) {
                 </div>
                 <div class="col-5 mt-3">
 
-                    <!-- begin form voor de blog maken en daarna toevoegen-->
+                    <!-- begin form voor het editen van de blog-->
                     <form method="POST" action="" enctype="multipart/form-data">
-                        <h3>nieuwe set</h3>
-                        <!-- tekst vak voor de naam-->
-                        <p>Naam</p>
-                        <input class="form-control" type="text" name="name" required>
-                        <!-- beschrijving tekst -->
-                        <p>beschrijving</p>
-                        <input class="form-control" type="text" name="description" required>
-
-                        <!-- dropdown voor merken -->
-                        <p>Uw merk</p>
-
-                        <select class="form-select" name="brand" aria-label="Default select example" required>
-                            <option value="" selected>Kies uw merk</option>
-                            <!--foreach loop om alle merken te laten zien -->
-                            <?php foreach ($brands as $brand) { ?>
-                                <option value="<?= $brand->id ?>"><?= $brand->name ?></option> <?php
-                            }
-                            ?>
-                        </select>
-                        <p>Uw thema</p>
-                        <select class="form-select" name="theme" aria-label="Default select example" required>
-                            <option value="" selected>Kies uw thema</option>
-                            <?php foreach ($themes as $theme) { ?>
-                                <option value="<?= $theme->id ?>">
-                                    <?= $theme->name ?>
-                                </option>
-                                <?php
-                            }
-                            ?>
-                        </select>
-                        <!-- tekst vak voor prijs-->
-                        <p>Prijs</p>
-                        <input class="form-control" type="text" name="price" required>
-                        <!-- tekst vak voor de steentjes-->
-                        <p>aantal steentjes</p>
-                        <input class="form-control" type="text" name="pieces" required>
-                        <!-- tekst vak voor de leeftijd-->
-                        <p>Leeftijd</p>
-                        <input class="form-control" type="text" name="age" required>
-                        <!-- tekst vak voor de steentjes-->
-                        <p>Vooraad</p>
-                        <input class="form-control" type="text" name="stock" required>
-                        <!-- de knop om het merk toetevoegen aan de database-->
-                        <button type="submit" name="insertPost" class="btn btn-primary">Submit</button>
+                        <h3>Merk</h3>
+                        <!-- vult de informatie van de blog al automatisch in-->
+                        <input class="form-control" type="text" name="name" value="<?= $set->name ?>" required>
+                        <!--  de knop om te editen-->
+                        <button type="submit" name="insertPost" class="btn btn-primary">Edit</button>
                 </div>
-                <!-- om een foto toetevoegen aan de blog-->
+                <!-- de foto toevengen gedeelte-->
                 <div class="col-1 mt-5">
                     <h6>Voeg hier uw foto toe.</h6>
-                    <input type="file" name="file" class="form-control-file" />
+                    <input type="file" name="file" class="form-control-file" /><br><br>
+                    <!-- pakt de foto uit upload map-->
+                    <img src="../upload/<?= $set->image ?>"
+                        style="max-width: 350px; max-height: 350px; display: block;">
                     <br><br>
                     </form>
                 </div>
@@ -212,11 +158,6 @@ if (isset($_POST["insertPost"])) {
                 }
             </style>
         </div>
-        <!--java bootstrap code-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-            crossorigin="anonymous"></script>
-
     </body>
 
 </html>

@@ -104,7 +104,7 @@ if ($user->role == null) {
                 <!-- alle checks voor de contole bars-->
                 <!--ckeck om te kijken of je net iets hebt geupdate voor een controle bar-->
                 <?php
-                if (isset($_GET["update"])) 
+                if (isset($_GET["update"])) {
                     ?>
                     <div class="alert alert-success d-flex align-items-center" role="alert">
                         <!-- voor het symbol-->
@@ -115,10 +115,11 @@ if ($user->role == null) {
                         </svg>
                         <!--tekst in de bar-->
                         <div>
-                            <p>Uw blog is geupdate</p>
+                            <p>Uw merk is aangepast</p>
                         </div>
                     </div>
-                <?php 
+                <?php
+                }
                 //alert check om aantegeven dat je geen admin bent
                 if (isset($_GET["adminCheck"])) {
                     ?>
@@ -147,7 +148,7 @@ if ($user->role == null) {
                         </svg>
                         <!-- tekst in de controle bar-->
                         <div>
-                            <p>Uw blog is gedelete</p>
+                            <p>Uw merk is verwijdert</p>
                         </div>
                     </div>
                 <?php }
@@ -162,7 +163,7 @@ if ($user->role == null) {
                                 d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                         </svg>
                         <div>
-                            <p>U heeft een blog aangemaakt</p>
+                            <p>U heeft een merk aangemaakt</p>
                         </div>
                     </div>
                 <?php }
@@ -184,7 +185,7 @@ if ($user->role == null) {
                                 <div class="embed-responsive embed-responsive-1by1">
                                     <!-- voor de foto van de blog-->
                                     <img src="../upload/<?= $brand->image ?>" class="card-img-top embed-responsive-item"
-                                        style="object-fit: fill; height: 18rem;" alt="foto">
+                                        style="object-fit: contain; height: 18rem;" alt="foto">
                                 </div>
                                 <!-- voor de blog informatie-->
                                 <div class="card-body">

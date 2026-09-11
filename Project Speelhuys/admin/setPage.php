@@ -14,7 +14,7 @@ $conn = Database::start();
 $session = Session::findSession();
 $userId = $session->userId;
 $user = User::findAdmin($userId);
-$set = Set::findAllsets();
+$sets = Set::findAllsets();
 // check om zeker te zijn anders wordt je weggestuurd
 
 if ($session == false) {
@@ -118,8 +118,8 @@ if ($user->role == null) {
                         </div>
                     </div>
                 <?php }
-                
-                 
+
+
                 // checkt of je net wat hebt gedelete en geeft je confermatie daarvan
                 if (isset($_GET["delete"])) {
                     ?>
@@ -149,6 +149,48 @@ if ($user->role == null) {
                         <div>
                             <p>U heeft een blog aangemaakt</p>
                         </div>
-                    </div> 
+                    </div>
                 <?php }
                 //einde checks
+                //checkt of er wel sets zijn
+                if ($sets) {
+                    foreach ($sets as $set) { ?>
+                        <div class="col-3 mt-3">
+                            <!--maakt een card voor elke set-->
+                            <div class="card mx-auto" style="width: 18rem;">
+                                <div class="embed-responsive embed-responsive-1by1">
+                                    <!-- voor de foto van de set-->
+                                    <img src="../upload/<?= $set->image ?>" class="card-img-top embed-responsive-item"
+                                        style="object-fit: contain; height: 18rem;" alt="foto">
+                                </div>
+                                <!-- voor de blog informatie-->
+                                <div class="card-body">
+                                    <h5 class="card-title"><?= $set->name ?></h5>
+                                    <!-- de button in de kaart voor de editpagina-->
+                                    <a href="setEdit.php?id=<?= $set->id ?>" class="btn btn-primary">Edit</a>
+                                    <!-- de button in de kaart voor de deletepagina-->
+                                    <a href="setDelete.php?id=<?= $set->id ?>" class="btn btn-primary">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    <?php }
+                } ?>
+                <div>
+                    <!-- dit is voor de achtergrond-->
+                    <?php
+                    $backgroundImage =
+                        // De achtergrond foto
+                        '../images/sand-2005066_1280.jpg';
+                    ?>
+                    <style>
+                        body {
+                            background-image: url('<?php echo $backgroundImage; ?>');
+                            background-size: cover;
+                        }
+                    </style>
+                </div>
+
+    </body>
+
+</html>

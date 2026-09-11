@@ -25,7 +25,7 @@ class Set
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                //maakt een blog aan voor elke blog
+                //maakt een set aan voor elke set
                 $set = new Set();
                 $set->id = $row['set_id'];
                 $set->name = $row['set_name'];
@@ -44,9 +44,6 @@ class Set
             //retunt alle sets
             $conn->close();
             return $sets;
-        } else {
-            $conn->close();
-            return false;
         }
     }
     // de functie om een specifieken blog tevinden met een blog id
@@ -224,7 +221,7 @@ class Set
         //om te zoeken in de database op naam en wachtwoord
         //
         $query = "SELECT * FROM sets 
-        WHERE sets_id = '$id'";
+        WHERE set_id = '$id'";
 
         $result = $conn->query($query);
 
@@ -296,7 +293,6 @@ class Set
     {
         $conn = Database::start();
 
-        $id = mysqli_real_escape_string($conn, $this->id);
         $name = mysqli_real_escape_string($conn, $this->name);
         $description = mysqli_real_escape_string($conn, $this->description);
         $brandId = mysqli_real_escape_string($conn, $this->brandId);
@@ -324,10 +320,12 @@ class Set
             '$themeId',
             '$image',
             '$price',
-            '$age; ,
+            '$age',
             '$pieces',
             '$stock'
         )";
+
+        
         $conn->query($sql);
         $conn->close();
     }

@@ -14,7 +14,7 @@ $prijs = $_GET['prijs'] ?? '';
 $leeftijd = $_GET['leeftijd'] ?? '';
 
 $perPagina = 8;
-$pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+$pagina = isset($_GET['pagina']) ? (int) $_GET['pagina'] : 1;
 $startPagina = ($pagina - 1) * $perPagina;
 
 $sets = Set::search($keywords, $merk, $thema, $prijs, $leeftijd, $perPagina, $startPagina);
@@ -121,111 +121,105 @@ $totalPages = ceil($totalResults / $perPagina);
 
                 <?php foreach ($sets as $set) { ?>
 
-    <div class="col-3 mt-3">
-        <div class="card mx-auto h-100" style="width: 18rem min height: 500px;">
+                    <div class="col-3 mt-3">
+                        <div class="card mx-auto h-100" style="width: 18rem min height: 500px;">
 
-            <div class="embed-responsive embed-responsive-1by1">
-                <img src="../upload/<?= $set->image ?>"
-                    class="card-img-top embed-responsive-item"
-                    style="object-fit: contain; height: 18rem;"
-                    alt="<?= $set->name ?>">
+                            <div class="embed-responsive embed-responsive-1by1">
+                                <img src="../upload/<?= $set->image ?>" class="card-img-top embed-responsive-item"
+                                    style="object-fit: contain; height: 18rem;" alt="<?= $set->name ?>">
+                            </div>
+
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title"><?= $set->name ?></h5>
+
+                                <p class="card-text" style="height:90px; overflow: hidden;">
+                                    <?= $set->description ?>
+                                </p>
+
+                                <p class="card-text">
+                                    €<?= $set->price ?>
+                                </p>
+
+                                <a href="../user/detailpage.php?id=<?= $set->id ?>" class="btn btn-primary mt-auto">
+                                    Bekijk product
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                <?php } ?>
+
+                <nav>
+                    <ul class="pagination justify-content-center">
+
+                        <?php if ($pagina > 1) { ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?<?= http_build_query([
+                                    'keywords' => $keywords,
+                                    'merk' => $merk,
+                                    'thema' => $thema,
+                                    'prijs' => $prijs,
+                                    'leeftijd' => $leeftijd,
+                                    'pagina' => $pagina - 1
+                                ]) ?>">
+                                    Vorige
+                                </a>
+                            </li>
+                        <?php } ?>
+
+                        <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
+
+                            <li class="page-item <?= $i == $pagina ? 'active' : '' ?>">
+                                <a class="page-link" href="?<?= http_build_query([
+                                    'keywords' => $keywords,
+                                    'merk' => $merk,
+                                    'thema' => $thema,
+                                    'prijs' => $prijs,
+                                    'leeftijd' => $leeftijd,
+                                    'pagina' => $i
+                                ]) ?>">
+                                    <?= $i ?>
+                                </a>
+                            </li>
+
+                        <?php } ?>
+
+                        <?php if ($pagina < $totalPages) { ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?<?= http_build_query([
+                                    'keywords' => $keywords,
+                                    'merk' => $merk,
+                                    'thema' => $thema,
+                                    'prijs' => $prijs,
+                                    'leeftijd' => $leeftijd,
+                                    'pagina' => $pagina + 1
+                                ]) ?>">
+                                    Volgende
+                                </a>
+                            </li>
+                        <?php } ?>
+
+                    </ul>
+                </nav>
+
             </div>
-
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title"><?= $set->name ?></h5>
-
-                <p class="card-text" style="height:90px; overflow: hidden;">
-                    <?= $set->description ?>
-                </p>
-
-                <p class="card-text">
-                    €<?= $set->price ?>
-                </p>
-
-                <a href="../user/detailpage.php?id=<?= $set->id ?>"
-                    class="btn btn-primary mt-auto">
-                    Bekijk product
-                </a>
-            </div>
-
         </div>
-    </div>
-
-
-    
-    <?php } ?>
-    
-    <nav>
-    <ul class="pagination justify-content-center">
-    
-        <?php if ($pagina > 1) { ?>
-            <li class="page-item">
-                <a class="page-link"
-                   href="?<?= http_build_query([
-                       'keywords' => $keywords,
-                       'merk' => $merk,
-                       'thema' => $thema,
-                       'prijs' => $prijs,
-                       'leeftijd' => $leeftijd,
-                       'pagina' => $pagina - 1
-                   ]) ?>">
-                    Vorige
-                </a>
-            </li>
-        <?php } ?>
-    
-        <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
-    
-            <li class="page-item <?= $i == $pagina ? 'active' : '' ?>">
-                <a class="page-link"
-                   href="?<?= http_build_query([
-                       'keywords' => $keywords,
-                       'merk' => $merk,
-                       'thema' => $thema,
-                       'prijs' => $prijs,
-                       'leeftijd' => $leeftijd,
-                       'pagina' => $i
-                   ]) ?>">
-                    <?= $i ?>
-                </a>
-            </li>
-    
-        <?php } ?>
-    
-        <?php if ($pagina < $totalPages) { ?>
-            <li class="page-item">
-                <a class="page-link"
-                   href="?<?= http_build_query([
-                       'keywords' => $keywords,
-                       'merk' => $merk,
-                       'thema' => $thema,
-                       'prijs' => $prijs,
-                       'leeftijd' => $leeftijd,
-                       'pagina' => $pagina + 1
-                   ]) ?>">
-                    Volgende
-                </a>
-            </li>
-        <?php } ?>
-    
-    </ul>
-    </nav>
-    
-</div>
-</div>
-<div>
-                <!-- dit is voor de achtergrond-->
-                <?php
-                $backgroundImage =
-                    // De achtergrond foto
-                    '../images/sand-2005066_1280.jpg';
-                ?>
-                <style>
-                    body {
-                        background-image: url('<?php echo $backgroundImage; ?>');
-                        background-size: cover;
-                    }
-                </style>
+        <div>
+            <!-- dit is voor de achtergrond-->
+            <?php
+            $backgroundImage =
+                // De achtergrond foto
+                '../images/sand-2005066_1280.jpg';
+            ?>
+            <style>
+                body {
+                    background-image: url('<?php echo $backgroundImage; ?>');
+                    background-size: cover;
+                }
+            </style>
         </div>
     </body>
 
