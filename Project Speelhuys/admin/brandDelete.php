@@ -148,7 +148,7 @@ if (isset($_POST["deleteBtn"])) {
                             </tr>
                         </table>
                     </div>
-                <? } ?>
+                <?php } ?>
             </div>
         </div>
         <div>

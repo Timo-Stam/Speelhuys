@@ -141,12 +141,12 @@ if (isset($_POST["deleteBtn"])) {
                             </tr>
                         </table>
                     </div>
-                <? } ?>
+                <?php } ?>
             </div>
         </div>
         <div>
             <!-- dit is voor de achtergrond-->
-            <?
+            <?php
             $backgroundImage =
                 // de achtergrond foto
                 '../images/kavowo-paper-3155438.jpg';
