@@ -13,8 +13,6 @@ if ($set == false) {
 }
 
 $brand = Brand::findBrandById($set->brandId);
-$theme = Theme::findThemeById($set->themeId);
-
 $theme = $set->themeId ? Theme::findThemeById($set->themeId) : null;
 
 ?>
@@ -27,7 +25,7 @@ $theme = $set->themeId ? Theme::findThemeById($set->themeId) : null;
     <title>form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-        <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../css/public.css">
 </head>
 <div class="text-center mt-3">
 
@@ -61,22 +59,49 @@ $theme = $set->themeId ? Theme::findThemeById($set->themeId) : null;
                         </div>
                     </div>
                 </nav>
-                
+
                 <div class="text-start mt-2">
                     <a href="overview.php" class="btn btn-secondary btn-sm back-btn">Terug</a>
                 </div>
 
                 <div class="col-4 mt-3">
-                    <img src="../upload/<?= $set->image; ?>" alt="<?= $set->name; ?>" align="left" width="300" height="300">
+                    <img src="../upload/<?= $set->image; ?>" alt="<?= $set->name; ?>" align="left"
+                        style="max-width: 100%; height: auto; margin-right: 20px;">
                 </div>
-                
+
                 <div class="col-4 mt-3">
-                    <div class="info-box"><p><strong><?= $set->name; ?></strong></p></div>
-                    <div class="info-box"><p><strong>Merk</strong>: <?= $brand->name; ?></p></div>
-                    <div class="info-box"><p><strong>Thema</strong>: <?= $theme->name; ?></p></div>
-                    <div class="info-box"><p><strong>Leeftijd</strong>: <?= $set->age; ?></p></div>
-                    <div class="info-box"><p><strong>Prijs</strong>: €<?= $set->price; ?></p></div>
-                    <div class="info-box"><p><strong>Aantal blokken</strong>: <?= $set->pieces; ?></p></div>
-                    <div class="info-box"><p><strong>Beschrijving</strong>: <?= $set->description; ?></p></div>
-                    <div class="info-box"><p><strong>Voorraad</strong>: <?= $set->stock > 0 ? $set->stock : 'Niet beschikbaar'; ?></p></div>
+                    <div class="info-box">
+                        <p><strong><?= $set->name; ?></strong></p>
+                    </div>
+                    <div class="info-box">
+                        <p><strong>Merk</strong>: <?= $brand ? $brand->name : 'Onbekend'; ?></p>
+                    </div>
+                    <div class="info-box">
+                        <p><strong>Thema</strong>: <?= $theme ? $theme->name : 'Geen thema'; ?></p>
+                    </div>
+                    <div class="info-box">
+                        <p><strong>Leeftijd</strong>: <?= $set->age; ?></p>
+                    </div>
+                    <div class="info-box">
+                        <p><strong>Prijs</strong>: €<?= $set->price; ?></p>
+                    </div>
+                    <div class="info-box">
+                        <p><strong>Aantal blokken</strong>: <?= $set->pieces; ?></p>
+                    </div>
+                    <div class="info-box">
+                        <p><strong>Beschrijving</strong>: <?= $set->description; ?></p>
+                    </div>
+                    <div class="info-box">
+                        <p><strong>Voorraad</strong>: <?= $set->stock > 0 ? $set->stock : 'Niet beschikbaar'; ?></p>
+                    </div>
                 </div>
+
+                <style>
+                    body {
+                        background: #0d1820;
+                        background-image: radial-gradient(circle at 100% 1%, rgba(151, 168, 66, 0.4), transparent 30%);
+                    }
+                </style>
+    </body>
+
+</html>

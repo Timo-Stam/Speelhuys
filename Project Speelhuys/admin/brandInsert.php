@@ -56,6 +56,7 @@ if (isset($_POST["brand"])) {
     <title>form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/public.css">
 </head>
 <div class="text-center mt-3">
 
@@ -126,7 +127,7 @@ if (isset($_POST["brand"])) {
                     <form method="POST" action="" enctype="multipart/form-data">
                         <h3>Merk</h3>
                         <!-- tekst vak voor het merk-->
-                        <input class="form-control" type="text" name="brand" required><br>  
+                        <input class="form-control" type="text" name="brand" required><br>
                         <!-- de knop om het merk toetevoegen aan de database-->
                         <button type="submit" name="insertPost" class="btn btn-primary">Submit</button>
                 </div>
@@ -151,8 +152,8 @@ if (isset($_POST["brand"])) {
             ?>
             <style>
                 body {
-                    background-image: url('<?php echo $backgroundImage; ?>');
-                    background-size: cover;
+                    background: #0d1820;
+                    background-image: radial-gradient(circle at 79% 12%, rgba(151, 168, 66, 0.4), transparent 30%);
                 }
             </style>
         </div>

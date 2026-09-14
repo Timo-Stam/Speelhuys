@@ -73,6 +73,7 @@ if (isset($_POST["insertPost"])) {
     <title>form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/public.css">
 </head>
 <div class="text-center mt-3">
 
@@ -147,11 +148,11 @@ if (isset($_POST["insertPost"])) {
                         <input class="form-control" type="text" name="name" required>
                         <!-- beschrijving tekst -->
                         <p>beschrijving</p>
-                         <div class="form-group">
+                        <div class="form-group">
                             <lablel for="content">Inhoud:</lablel><br>
                             <!-- tekst area voor de content-->
                             <textarea class="jqte" id="content" name="description" required></textarea>
-                        </div>  
+                        </div>
                         <!-- dropdown voor merken -->
                         <p>Uw merk</p>
 
@@ -210,8 +211,8 @@ if (isset($_POST["insertPost"])) {
             ?>
             <style>
                 body {
-                    background-image: url('<?php echo $backgroundImage; ?>');
-                    background-size: cover;
+                    background: #0d1820;
+                    background-image: radial-gradient(circle at 21% 45%, rgba(151, 168, 66, 0.4), transparent 30%);
                 }
             </style>
         </div>

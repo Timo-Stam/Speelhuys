@@ -54,6 +54,7 @@ if (isset($_POST["deleteBtn"])) {
     <title>form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/public.css">
 </head>
 <div class="text-center mt-3">
 
@@ -206,20 +207,21 @@ if (isset($_POST["deleteBtn"])) {
             ?>
             <style>
                 body {
-                    background-image: url('<?php echo $backgroundImage; ?>');
-                    background-size: cover;
+                    background: #0d1820;
+                    background-image: radial-gradient(circle at 65% 89%, rgba(151, 168, 66, 0.4), transparent 30%);
                 }
             </style>
         </div>
         <!-- script voor de tekst area-->
-    <div>
-        <script type="text/javascript" src="https://code.jquery.com/jquery.min.js" charset="utf-8"></script>
-        <script type="text/javascript" src="../js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script>
-            $('.jqte').jqte();
-        </script>
-    </div>
+        <div>
+            <script type="text/javascript" src="https://code.jquery.com/jquery.min.js" charset="utf-8"></script>
+            <script type="text/javascript" src="../js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <script>
+                $('.jqte').jqte();
+            </script>
+        </div>
 </div>
 </body>
+
 </html>

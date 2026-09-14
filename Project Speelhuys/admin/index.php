@@ -7,6 +7,7 @@
     <title>form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/public.css">
 
 </head>
 
@@ -162,18 +163,18 @@
             </div>
         </div>
         <div>
-        <!-- dit is voor de achtergrond-->
-        <?php
-        $backgroundImage =
-            // De achtergrond foto
-            '../images/sand-2005066_1280.jpg';
-        ?>
-        <style>
-            body {
-                background-image: url('<?php echo $backgroundImage; ?>');
-                background-size: cover;
-            }
-        </style>
+            <!-- dit is voor de achtergrond-->
+            <?php
+            $backgroundImage =
+                // De achtergrond foto
+                '../images/sand-2005066_1280.jpg';
+            ?>
+            <style>
+                body {
+                    background: #0d1820;
+                    background-image: radial-gradient(circle at 23% 67%, rgba(151, 168, 66, 0.4), transparent 30%);
+                }
+            </style>
         </div>
     </body>
 

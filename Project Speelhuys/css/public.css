@@ -1,9 +1,157 @@
+:root {
+    --bg-dark: #0d1820;
+    --bg-mid: #1a252d;
+    --panel: #24333d;
+    --panel-light: #2f3e4a;
+    --accent: #f4d35e;
+    --accent-dark: #d9b947;
+    --text: #f3f3f3;
+    --muted: #ccd4da;
+    --border: #395061;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+
+.page-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-area {
+    flex: 1;
+}
+
+.pagination {
+    margin-top: auto;
+}
+
+.navbar {
+    background-color: var(--bg-mid) !important;
+    border-bottom: 2px solid var(--accent);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand,
+.nav-link,
+.navbar h5,
+.navbar h4 {
+    color: var(--text) !important;
+}
+
+.btn,
+.page-link,
+.page-item.active .page-link {
+    border-radius: 6px;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-outline-light {
+    background-color: var(--accent);
+    border: 1px solid var(--accent);
+    color: #1b1b1b;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-outline-light:hover {
+    background-color: var(--accent-dark);
+    border-color: var(--accent-dark);
+    color: #1b1b1b;
+}
+
+.card,
+.info-box {
+    background-color: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.card {
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(244, 211, 94, 0.2);
+}
+
+.card-title,
+.card-text,
+.info-box p,
+.info-box strong {
+    color: var(--text);
+}
+
+.form-control,
+.form-select,
+input,
+select {
+    background-color: var(--bg-mid);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 6px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+input::placeholder,
+select option {
+    color: var(--muted);
+}
+
+.page-link {
+    background-color: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.page-item.active .page-link {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #1b1b1b;
+}
+
+.page-link:hover {
+    background-color: var(--panel-light);
+    color: var(--text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--text);
+}
+
+img {
+    border-radius: 8px;
+}
+
+.container,
+.row {
+    position: relative;
+}
+
+.text-start {
+    text-align: left;
+}
+
+.back-btn {
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    line-height: 1.2;
+}
+
 .info-box {
     align-items: right;
-    background-color: #3b4756;
-    color: white;
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 5px;
     text-align: center;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
 }

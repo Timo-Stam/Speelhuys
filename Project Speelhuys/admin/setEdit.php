@@ -66,6 +66,7 @@ if (isset($_POST["name"])) {
     <title>form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/public.css">
 </head>
 <div class="text-center mt-3">
 
@@ -143,7 +144,8 @@ if (isset($_POST["name"])) {
                         <div class="form-group">
                             <lablel for="content">Inhoud:</lablel><br>
                             <!-- vult de tekst van de set automatisch in-->
-                            <textarea class="jqte" id="content" name="description" required><?= $set->description ?></textarea>
+                            <textarea class="jqte" id="content" name="description"
+                                required><?= $set->description ?></textarea>
                         </div>
                         <!-- dropdown voor merken -->
                         <p>Uw merk</p>
@@ -204,13 +206,13 @@ if (isset($_POST["name"])) {
             ?>
             <style>
                 body {
-                    background-image: url('<?= $backgroundImage; ?>');
-                    background-size: cover;
+                    background: #0d1820;
+                    background-image: radial-gradient(circle at 9% 54%, rgba(151, 168, 66, 0.4), transparent 30%);
                 }
             </style>
         </div>
         <!-- de script voor de tekstblok-->
-         <div>
+        <div>
             <script type="text/javascript" src="https://code.jquery.com/jquery.min.js" charset="utf-8"></script>
             <script type="text/javascript" src="../js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

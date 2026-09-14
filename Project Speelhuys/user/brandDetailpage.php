@@ -100,8 +100,8 @@ if ($brand == null) {
             ?>
             <style>
                 body {
-                    background-image: url('<?php echo $backgroundImage; ?>');
-                    background-size: cover;
+                    background: #0d1820;
+                    background-image: radial-gradient(circle at 67% 24%, rgba(151, 168, 66, 0.4), transparent 30%);
                 }
             </style>
         </div>
