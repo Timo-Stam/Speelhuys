@@ -4,6 +4,8 @@ include "../classes/session.php";
 include "../classes/user.php";
 include "../classes/connection.php";
 include "../classes/set.php";
+include "../classes/brand.php";
+include "../classes/theme.php";
 
 // check voor cookie
 if (!isset($_COOKIE["speelhuys-project-cookie"])) {
@@ -15,6 +17,8 @@ $session = Session::findSession();
 $id = $session->userId;
 $user = User::findAdmin($id);
 $set = Set::findSetById($_GET["id"]);
+$brand = Brand::findBrandById($set->brandId);
+$theme = Theme::findThemeById($set->themeId);
 
 //check van de dingen die je uit de database haalt en anders wordt je weggestuurd
 if ($set == null) {
@@ -131,9 +135,51 @@ if (isset($_POST["deleteBtn"])) {
                             </tr>
                             <tr>
                                 <td>
+                                    <!--dit zet de titel van de blog neer-->
+                                    <h2><?= $set->description ?></h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <!-- de foto van de blog-->
                                     <img src="../upload/<?= $set->image ?>" class="img-fluid img-thumbnail"
-                                        style="max-height: 400px; max-width: 400;">
+                                        style="max-height: 200px; max-width: 200;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!--dit zet de titel van de blog neer-->
+                                    <h2><?= $brand->name ?></h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!--dit zet de titel van de blog neer-->
+                                    <h2><?= $theme->name ?></h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!--dit zet de titel van de blog neer-->
+                                    <h2><?= $set->price ?></h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!--dit zet de titel van de blog neer-->
+                                    <h2><?= $set->pieces ?></h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!--dit zet de titel van de blog neer-->
+                                    <h2><?= $set->age ?></h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!--dit zet de titel van de blog neer-->
+                                    <h2><?= $set->stock ?></h2>
                                 </td>
                             </tr>
                             <tr>
@@ -165,6 +211,15 @@ if (isset($_POST["deleteBtn"])) {
                 }
             </style>
         </div>
-    </body>
-
+        <!-- script voor de tekst area-->
+    <div>
+        <script type="text/javascript" src="https://code.jquery.com/jquery.min.js" charset="utf-8"></script>
+        <script type="text/javascript" src="../js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            $('.jqte').jqte();
+        </script>
+    </div>
+</div>
+</body>
 </html>

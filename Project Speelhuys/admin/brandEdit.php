@@ -136,7 +136,6 @@ if (isset($_POST["name"])) {
                     <!-- pakt de foto uit upload map-->
                     <img src="../upload/<?= $brand->image ?>"
                         style="max-width: 350px; max-height: 350px; display: block;">
-                    <br><br>
                     </form>
                 </div>
                 <div class="col-2">

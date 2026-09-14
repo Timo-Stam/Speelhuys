@@ -4,6 +4,8 @@ include "../classes/session.php";
 include "../classes/user.php";
 include "../classes/connection.php";
 include "../classes/set.php";
+include "../classes/brand.php";
+include "../classes/theme.php";
 //check voor cookie
 if (!isset($_COOKIE["speelhuys-project-cookie"])) {
     header("location: index.php?message=Geen cookie gevonden.");
@@ -12,7 +14,11 @@ if (!isset($_COOKIE["speelhuys-project-cookie"])) {
 $session = Session::findSession();
 $userId = $session->userId;
 $user = User::findAdmin($userId);
+$brands = Brand::findAllBrands();
+$themes = Theme::findAllThemes();
 $set = Set::findsetById($_GET["id"]);
+$brand = Brand::findBrandById($set->brandId);
+$theme = Theme::findThemeById($set->themeId);
 
 // check alles uit de database en als er een fout is stuurt het je terug naar inlog pagina
 if ($session == false) {
@@ -26,18 +32,23 @@ if ($user->role == null) {
     header("Location: index.php?message=Geen admin.");
     exit;
 }
+
 // kijkt of je alles hebt ingevuld als je op de knop drukt
 if (isset($_POST["name"])) {
+    // als er een nieuwe foto is geüpload
     if (!empty($_FILES["file"]["name"])) {
         $set->image = $_FILES["file"]["name"];
-        //verplaats de foto naar upload map
         move_uploaded_file($_FILES["file"]["tmp_name"], "../upload/" . $_FILES["file"]["name"]);
     }
     //post de naam, beschrijving en foto
-    ///
-    //
-    //!
     $set->name = $_POST["name"];
+    $set->description = $_POST["description"];
+    $set->brandId = $_POST["brand"];
+    $set->themeId = $_POST["theme"];
+    $set->price = $_POST["price"];
+    $set->age = $_POST["age"];
+    $set->pieces = $_POST["pieces"];
+    $set->stock = $_POST["stock"];
     //update de blog met de nieuwe aanpassingen
     $set->updateSet();
     header("Location: setPage.php?update=true");
@@ -123,20 +134,60 @@ if (isset($_POST["name"])) {
 
                     <!-- begin form voor het editen van de blog-->
                     <form method="POST" action="" enctype="multipart/form-data">
-                        <h3>Merk</h3>
-                        <!-- vult de informatie van de blog al automatisch in-->
-                        <input class="form-control" type="text" name="name" value="<?= $set->name ?>" required>
-                        <!--  de knop om te editen-->
-                        <button type="submit" name="insertPost" class="btn btn-primary">Edit</button>
+                        <h3>nieuwe set</h3>
+                        <!-- tekst vak voor de naam-->
+                        <p>Naam</p>
+                        <input class="form-control" value="<?= $set->name ?>" type="text" name="name" required>
+                        <!-- beschrijving tekst -->
+                        <p>beschrijving</p>
+                        <div class="form-group">
+                            <lablel for="content">Inhoud:</lablel><br>
+                            <!-- vult de tekst van de set automatisch in-->
+                            <textarea class="jqte" id="content" name="description" required><?= $set->description ?></textarea>
+                        </div>
+                        <!-- dropdown voor merken -->
+                        <p>Uw merk</p>
+                        <select class="form-select" name="brand" value="" aria-label="Default select example" required>
+                            <option value="<?= $brand->id ?>" selected> <?= $brand->name ?></option>
+                            <!--foreach loop om alle merken te laten zien -->
+                            <?php foreach ($brands as $brand) { ?>
+                                <option value="<?= $brand->id ?>"><?= $brand->name ?></option> <?php
+                            }
+                            ?>
+                        </select>
+                        <p>Uw thema</p>
+                        <select class="form-select" name="theme" aria-label="Default select example" required>
+                            <option value=" <?= $theme->id ?>" selected> <?= $theme->name ?></option>
+                            <?php foreach ($themes as $theme) { ?>
+                                <option value="<?= $theme->id ?>">
+                                    <?= $theme->name ?>
+                                </option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                        <!-- tekst vak voor prijs-->
+                        <p>Prijs</p>
+                        <input class="form-control" value="<?= $set->price ?>" type="text" name="price" required>
+                        <!-- tekst vak voor de steentjes-->
+                        <p>aantal steentjes</p>
+                        <input class="form-control" value="<?= $set->pieces ?>" type="text" name="pieces" required>
+                        <!-- tekst vak voor de leeftijd-->
+                        <p>Leeftijd</p>
+                        <input class="form-control" value="<?= $set->age ?>" type="text" name="age" required>
+                        <!-- tekst vak voor de steentjes-->
+                        <p>Vooraad</p>
+                        <input class="form-control" value="<?= $set->stock ?>" type="text" name="stock" required>
+                        <!-- de knop om het merk toetevoegen aan de database-->
+                        <button type="submit" name="editPost" class="btn btn-primary">Submit</button>
                 </div>
-                <!-- de foto toevengen gedeelte-->
+                <!-- om een foto toetevoegen -->
                 <div class="col-1 mt-5">
                     <h6>Voeg hier uw foto toe.</h6>
                     <input type="file" name="file" class="form-control-file" /><br><br>
                     <!-- pakt de foto uit upload map-->
                     <img src="../upload/<?= $set->image ?>"
                         style="max-width: 350px; max-height: 350px; display: block;">
-                    <br><br>
                     </form>
                 </div>
                 <div class="col-2">
@@ -153,10 +204,19 @@ if (isset($_POST["name"])) {
             ?>
             <style>
                 body {
-                    background-image: url('<?php echo $backgroundImage; ?>');
+                    background-image: url('<?= $backgroundImage; ?>');
                     background-size: cover;
                 }
             </style>
+        </div>
+        <!-- de script voor de tekstblok-->
+         <div>
+            <script type="text/javascript" src="https://code.jquery.com/jquery.min.js" charset="utf-8"></script>
+            <script type="text/javascript" src="../js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <script>
+                $('.jqte').jqte();
+            </script>
         </div>
     </body>
 

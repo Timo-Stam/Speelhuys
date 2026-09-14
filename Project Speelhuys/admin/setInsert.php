@@ -147,8 +147,11 @@ if (isset($_POST["insertPost"])) {
                         <input class="form-control" type="text" name="name" required>
                         <!-- beschrijving tekst -->
                         <p>beschrijving</p>
-                        <input class="form-control" type="text" name="description" required>
-
+                         <div class="form-group">
+                            <lablel for="content">Inhoud:</lablel><br>
+                            <!-- tekst area voor de content-->
+                            <textarea class="jqte" id="content" name="description" required></textarea>
+                        </div>  
                         <!-- dropdown voor merken -->
                         <p>Uw merk</p>
 

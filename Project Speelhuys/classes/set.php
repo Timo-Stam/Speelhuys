@@ -3,7 +3,7 @@ class Set
 {
     public int $id;
     public string $name;
-    public string $description;
+    public ?string $description;
     public int $brandId;
     public ?int $themeId;
     public $image;
