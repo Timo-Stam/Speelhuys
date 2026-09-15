@@ -48,7 +48,7 @@ class Set
     }
     // de functie om een specifieken blog tevinden met een blog id
 
-    public static function search($keywords, $merk, $thema, $prijs, $leeftijd, $limit, $offset)
+    public static function search($keywords, $merk, $thema, $prijs, $leeftijd, $blokken, $limit, $offset)
     {
         $conn = Database::start();
 
@@ -88,6 +88,19 @@ class Set
         }
         if ($leeftijd === '13+') {
             $sql .= " AND sets.set_age >= 13";
+        }
+
+        if ($blokken === '0-100') {
+            $sql .= " AND sets.set_pieces BETWEEN 0 AND 100";
+        }
+        if ($blokken === '101-500') {
+            $sql .= " AND sets.set_pieces BETWEEN 101 AND 500";
+        }
+        if ($blokken === '501-1000') {
+            $sql .= " AND sets.set_pieces BETWEEN 501 AND 1000";
+        }
+        if ($blokken === '1001+') {
+            $sql .= " AND sets.set_pieces >= 1001";
         }
 
         if ($prijs === 'laag') {
@@ -140,7 +153,7 @@ class Set
         return $sets;
     }
 
-    public static function searchCount($keywords, $merk, $thema, $leeftijd)
+    public static function searchCount($keywords, $merk, $thema, $leeftijd, $blokken)
     {
         $conn = Database::start();
 
@@ -185,6 +198,19 @@ class Set
 
         if ($leeftijd === '13+') {
             $sql .= " AND sets.set_age >= 13";
+        }
+
+        if ($blokken === '0-100') {
+            $sql .= " AND sets.set_pieces BETWEEN 0 AND 100";
+        }
+        if ($blokken === '101-500') {
+            $sql .= " AND sets.set_pieces BETWEEN 101 AND 500";
+        }
+        if ($blokken === '501-1000') {
+            $sql .= " AND sets.set_pieces BETWEEN 501 AND 1000";
+        }
+        if ($blokken === '1001+') {
+            $sql .= " AND sets.set_pieces >= 1001";
         }
 
         $stmt = $conn->prepare($sql);

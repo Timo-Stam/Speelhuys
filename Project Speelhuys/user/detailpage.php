@@ -64,12 +64,12 @@ $theme = $set->themeId ? Theme::findThemeById($set->themeId) : null;
                     <a href="overview.php" class="btn btn-secondary btn-sm back-btn">Terug</a>
                 </div>
 
-                <div class="col-4 mt-3">
-                    <img src="../upload/<?= $set->image; ?>" alt="<?= $set->name; ?>" align="left"
-                        style="max-width: 100%; height: auto; margin-right: 20px;">
+                <div class="col-12 col-lg-4 offset-lg-1 mt-3 d-flex justify-content-center align-items-start">
+                    <img src="../upload/<?= $set->image; ?>" alt="<?= $set->name; ?>"
+                        style="max-width: 100%; height: auto;">
                 </div>
 
-                <div class="col-4 mt-3">
+                <div class="col-12 col-lg-4 mt-3">
                     <div class="info-box">
                         <p><strong><?= $set->name; ?></strong></p>
                     </div>

@@ -12,18 +12,20 @@ $merk = $_GET['merk'] ?? '';
 $thema = $_GET['thema'] ?? '';
 $prijs = $_GET['prijs'] ?? '';
 $leeftijd = $_GET['leeftijd'] ?? '';
+$blokken = $_GET['blokken'] ?? '';
 
-$perPagina = 8;
+$perPagina = 4;
 $pagina = isset($_GET['pagina']) ? (int) $_GET['pagina'] : 1;
 $startPagina = ($pagina - 1) * $perPagina;
 
-$sets = Set::search($keywords, $merk, $thema, $prijs, $leeftijd, $perPagina, $startPagina);
+$sets = Set::search($keywords, $merk, $thema, $prijs, $leeftijd, $blokken, $perPagina, $startPagina);
 
 $totalResults = Set::searchCount(
     $keywords,
     $merk,
     $thema,
-    $leeftijd
+    $leeftijd,
+    $blokken
 );
 
 $totalPages = ceil($totalResults / $perPagina);
@@ -83,26 +85,19 @@ $totalPages = ceil($totalResults / $perPagina);
                         </label>
                         <select name="merk">
                             <option value="">Alle merken</option>
-                            <option value="lego">Lego</option>
-                            <option value="kapla">Kapla</option>
-                            <option value="duplo">Duplo</option>
-                            <option value="robotime">Robotime</option>
-                            <option value="smartmax">SmartMax</option>
-                            <option value="brio">Brio</option>
-                            <option value="playmobil">Playmobil</option>
-                            <option value="megabloks">Megabloks</option>
-                            <option value="megaconstrux">MegaConstrux</option>
-                            <option value="geomag">Geomag</option>
-                            <option value="knex">KNEX</option>
-                            <option value="gravitrax">GraviTrax</option>
-                            <option value="clementoni">Clementoni</option>
+                            <?php foreach ($brands ?: [] as $brand) { ?>
+                                <option value="<?= $brand->name ?>" <?= $merk == $brand->name ? 'selected' : '' ?>>
+                                    <?= $brand->name ?>
+                                </option>
+                            <?php } ?>
                         </select>
                         <select name="thema">
                             <option value="">Alle thema's</option>
-                            <option value="Lego City">Lego City</option>
-                            <option value="Lego Marvel">Lego Marvel</option>
-                            <option value="Lego Friends">Lego Friends</option>
-                            <option value="Lego Architecture">Lego Architecture</option>
+                            <?php foreach ($themes ?: [] as $theme) { ?>
+                                <option value="<?= $theme->name ?>" <?= $thema == $theme->name ? 'selected' : '' ?>>
+                                    <?= $theme->name ?>
+                                </option>
+                            <?php } ?>
                         </select>
                         <select name="prijs">
                             <option value="">Alle prijzen</option>
@@ -116,6 +111,13 @@ $totalPages = ceil($totalResults / $perPagina);
                             <option value="7-9">7-9 jaar</option>
                             <option value="10-12">10-12 jaar</option>
                             <option value="13+">13+ jaar</option>
+                        </select>
+                        <select name="blokken">
+                            <option value="">Alle aantallen</option>
+                            <option value="0-100">0-100 stukken</option>
+                            <option value="101-500">101-500 stukken</option>
+                            <option value="501-1000">501-1000 stukken</option>
+                            <option value="1001+">1001+ stukken</option>
                         </select>
                         <input type="submit" value="search"><br>
                     </form>
@@ -165,6 +167,7 @@ $totalPages = ceil($totalResults / $perPagina);
                                         'thema' => $thema,
                                         'prijs' => $prijs,
                                         'leeftijd' => $leeftijd,
+                                        'blokken' => $blokken,
                                         'pagina' => $pagina - 1
                                     ]) ?>">
                                         Vorige
@@ -181,6 +184,7 @@ $totalPages = ceil($totalResults / $perPagina);
                                         'thema' => $thema,
                                         'prijs' => $prijs,
                                         'leeftijd' => $leeftijd,
+                                        'blokken' => $blokken,
                                         'pagina' => $i
                                     ]) ?>">
                                         <?= $i ?>
@@ -197,6 +201,7 @@ $totalPages = ceil($totalResults / $perPagina);
                                         'thema' => $thema,
                                         'prijs' => $prijs,
                                         'leeftijd' => $leeftijd,
+                                        'blokken' => $blokken,
                                         'pagina' => $pagina + 1
                                     ]) ?>">
                                         Volgende
