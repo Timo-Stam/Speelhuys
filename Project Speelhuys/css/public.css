@@ -155,3 +155,158 @@ img {
     text-align: center;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
 }
+/* ============================================
+   Aanvulling voor de inlogpagina
+   ============================================ */
+
+.card-header {
+    background-color: var(--panel-light);
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+    text-align: center;
+    padding: .9rem 1.25rem;
+}
+
+.card-body input[type="text"],
+.card-body input[type="password"] {
+    width: 100%;
+    margin-bottom: .5rem;
+}
+
+.card-body form button[type="submit"] p {
+    margin: 0;
+}
+
+.alert {
+    background-color: var(--panel);
+    border: 1px solid var(--accent);
+    color: var(--text);
+    border-radius: 8px;
+    max-width: 520px;
+    margin: 1rem auto;
+}
+
+.alert svg path {
+    fill: var(--accent);
+}
+
+body {
+    background-image: radial-gradient(circle at 23% 67%, rgba(244, 211, 94, 0.12), transparent 40%);
+    background-attachment: fixed;
+}
+/* Secundaire knop: "geen admin" iets minder prominent dan de hoofdactie */
+.btn-outline-light {
+    background-color: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+.btn-outline-light:hover {
+    background-color: var(--panel-light);
+    border-color: var(--accent);
+    color: var(--text);
+}
+
+/* Focus-effect op inputs, zodat duidelijk is welk veld actief is */
+.form-control:focus {
+    background-color: var(--bg-mid);
+    border-color: var(--accent);
+    color: var(--text);
+    box-shadow: 0 0 0 0.2rem rgba(244, 211, 94, 0.25);
+}
+/* ============================================
+   Aanvulling voor de sets-pagina
+   ============================================ */
+
+.set-card-img-wrap {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background-color: var(--bg-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.set-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.set-card {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.set-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+.btn-outline-danger {
+    background-color: transparent;
+    border: 1px solid #d9534f;
+    color: #f3f3f3;
+}
+
+.btn-outline-danger:hover {
+    background-color: #d9534f;
+    border-color: #d9534f;
+    color: #fff;
+}
+/* ============================================
+   Aanvulling voor de merk-pagina
+   ============================================ */
+
+.brand-card-img-wrap {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background-color: #f3f3f3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.brand-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+body.brand-page {
+    background-image: radial-gradient(circle at 43% 89%, rgba(151, 168, 66, 0.4), transparent 30%);
+}
+/* ============================================
+   Aanvulling voor de thema-pagina
+   ============================================ */
+
+body.theme-page {
+    background-image: radial-gradient(circle at 21% 34%, rgba(151, 168, 66, 0.4), transparent 30%);
+}
+
+.theme-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.theme-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* dun gekleurd streepje bovenaan de kaart, per thema uniek */
+.theme-card-tag {
+    height: 5px;
+    width: 100%;
+    background-color: var(--theme-accent);
+}
+
+/* rond icoon-blokje boven de titel, in dezelfde accentkleur */
+.theme-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    margin: 0 auto 0.75rem auto;
+    opacity: 0.85;
+}

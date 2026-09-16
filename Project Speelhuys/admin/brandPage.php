@@ -169,54 +169,44 @@ if ($user->role == null) {
                     </div>
                 <?php }
                 //einde checks
-                
-                //de link naar het maken van een merk maar het moet nog mooigemaakt worden
+
+                //de link naar het maken van een merk, nu als knop
                 ?>
-                <a class="nav-link active" href="brandInsert.php?id=<?= $session->userId ?>">
-                    <h5>nieuw merk toevoegen</h5>
-                </a>
+                <div class="mb-3">
+                    <a class="btn btn-primary" href="brandInsert.php?id=<?= $session->userId ?>">
+                        + Nieuw merk toevoegen
+                    </a>
+                </div>
                 <?php
 
                 //checkt of er wel blogs zijn
-                if ($brands) {
-                    foreach ($brands as $brand) { ?>
-                        <div class="col-3 mt-3">
-                            <!--maakt een card voor elke blog-->
-                            <div class="card mx-auto" style="width: 18rem;">
-                                <div class="embed-responsive embed-responsive-1by1">
-                                    <!-- voor de foto van de blog-->
-                                    <img src="../upload/<?= $brand->image ?>" class="card-img-top embed-responsive-item"
-                                        style="object-fit: contain; height: 18rem;" alt="foto">
-                                </div>
-                                <!-- voor de blog informatie-->
-                                <div class="card-body">
-                                    <h5 class="card-title"><?= $brand->name ?></h5>
-                                    <!-- de button in de kaart voor de editpagina-->
-                                    <a href="brandEdit.php?id=<?= $brand->id ?>" class="btn btn-primary">Edit</a>
-                                    <!-- de button in de kaart voor de deletepagina-->
-                                    <a href="brandDelete.php?id=<?= $brand->id ?>" class="btn btn-primary">Delete</a>
+                ?>
+                <div class="row justify-content-center g-4 mt-1">
+                    <?php
+                    if ($brands) {
+                        foreach ($brands as $brand) { ?>
+                            <div class="col-11 col-sm-6 col-md-4 col-lg-3">
+                                <!-- maakt een card voor elk merk -->
+                                <div class="card h-100 set-card">
+                                    <!-- voor het logo van het merk -->
+                                    <div class="brand-card-img-wrap">
+                                        <img src="../upload/<?= $brand->image ?>" class="brand-card-img" alt="<?= $brand->name ?>">
+                                    </div>
+                                    <!-- voor de merk informatie-->
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title"><?= $brand->name ?></h5>
+                                        <div class="mt-auto d-flex gap-2">
+                                            <a href="brandEdit.php?id=<?= $brand->id ?>" class="btn btn-primary flex-fill">Edit</a>
+                                            <a href="brandDelete.php?id=<?= $brand->id ?>" class="btn btn-outline-danger flex-fill">Delete</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <br>
-                    <?php }
-                } ?>
+                        <?php }
+                    } ?>
+                </div>
             </div>
         </div>
-</div>
-<div>
-    <!-- dit is voor de achtergrond-->
-    <?php
-    $backgroundImage =
-        // De achtergrond foto
-        '../images/sand-2005066_1280.jpg';
-    ?>
-    <style>
-        body {
-            background: #0d1820;
-            background-image: radial-gradient(circle at 43% 89%, rgba(151, 168, 66, 0.4), transparent 30%);
-        }
-    </style>
 </div>
 </body>
 

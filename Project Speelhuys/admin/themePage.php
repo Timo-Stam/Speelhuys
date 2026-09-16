@@ -28,6 +28,9 @@ if ($user->role == null) {
     header("Location: index.php?message=Geen admin");
     exit;
 }
+
+// setje accentkleuren die cyclisch over de thema-kaarten verdeeld worden
+$themeColors = ['#f4d35e', '#97a842', '#5eb1f4', '#e07a5f', '#a05ef4', '#5ef4b1'];
 ?>
 
 <!DOCTYPE html>
@@ -168,52 +171,46 @@ if ($user->role == null) {
                     </div>
                 <?php }
                 //einde checks
-                
-                //de link naar het maken van een thema maar het moet nog mooigemaakt worden
+
+                //de link naar het maken van een thema, nu als knop
                 ?>
-                <a class="nav-link active" href="themeInsert.php?id=<?= $session->userId ?>">
-                    <h5>nieuw thema toevoegen</h5>
-                </a>
-                <a class="nav-link active" href="setInsert.php?id=<?= $session->userId ?>">
-                    <h5>nieuw them toevoegen</h5>
-                </a>
+                <div class="mb-3">
+                    <a class="btn btn-primary" href="themeInsert.php?id=<?= $session->userId ?>">
+                        + Nieuw thema toevoegen
+                    </a>
+                </div>
                 <?php
 
-                //checkt of er wel blogs zijn
-                if ($themes) {
-                    foreach ($themes as $theme) { ?>
-                        <div class="col-3 mt-3">
-                            <!--maakt een card voor elke blog-->
-                            <div class="card mx-auto" style="width: 18rem;">
-                                <!-- voor de blog informatie-->
-                                <div class="card-body">
-                                    <h5 class="card-title"><?= $theme->name ?></h5>
-                                    <!-- de button in de kaart voor de editpagina-->
-                                    <a href="themeEdit.php?id=<?= $theme->id ?>" class="btn btn-primary">Edit</a>
-                                    <!-- de button in de kaart voor de deletepagina-->
-                                    <a href="themeDelete.php?id=<?= $theme->id ?>" class="btn btn-primary">Delete</a>
+                //checkt of er wel thema's zijn
+                ?>
+                <div class="row justify-content-center g-4 mt-1">
+                    <?php
+                    if ($themes) {
+                        $i = 0;
+                        foreach ($themes as $theme) {
+                            $color = $themeColors[$i % count($themeColors)];
+                            $i++;
+                            ?>
+                            <div class="col-11 col-sm-6 col-md-4 col-lg-3">
+                                <!-- maakt een card voor elk thema -->
+                                <div class="card h-100 theme-card" style="--theme-accent: <?= $color ?>;">
+                                    <div class="theme-card-tag"></div>
+                                    <!-- voor de thema informatie-->
+                                    <div class="card-body d-flex flex-column">
+                                        <div class="theme-icon" style="background-color: <?= $color ?>;"></div>
+                                        <h5 class="card-title"><?= $theme->name ?></h5>
+                                        <div class="mt-auto d-flex gap-2">
+                                            <a href="themeEdit.php?id=<?= $theme->id ?>" class="btn btn-primary flex-fill">Edit</a>
+                                            <a href="themeDelete.php?id=<?= $theme->id ?>" class="btn btn-outline-danger flex-fill">Delete</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <br>
-                    <?php }
-                } ?>
+                        <?php }
+                    } ?>
+                </div>
             </div>
         </div>
-</div>
-<div>
-    <!-- dit is voor de achtergrond-->
-    <?php
-    $backgroundImage =
-        // De achtergrond foto
-        '../images/sand-2005066_1280.jpg';
-    ?>
-    <style>
-        body {
-            background: #0d1820;
-            background-image: radial-gradient(circle at 21% 34%, rgba(151, 168, 66, 0.4), transparent 30%);
-        }
-    </style>
 </div>
 
 </body>

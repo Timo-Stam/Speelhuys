@@ -154,42 +154,31 @@ if ($user->role == null) {
                 <?php }
                 //einde checks
                 //checkt of er wel sets zijn
-                if ($sets) {
-                    foreach ($sets as $set) { ?>
-                        <div class="col-3 mt-3">
-                            <!--maakt een card voor elke set-->
-                            <div class="card mx-auto" style="width: 18rem;">
-                                <div class="embed-responsive embed-responsive-1by1">
-                                    <!-- voor de foto van de set-->
-                                    <img src="../upload/<?= $set->image ?>" class="card-img-top embed-responsive-item"
-                                        style="object-fit: contain; height: 18rem;" alt="foto">
-                                </div>
-                                <!-- voor de blog informatie-->
-                                <div class="card-body">
-                                    <h5 class="card-title"><?= $set->name ?></h5>
-                                    <!-- de button in de kaart voor de editpagina-->
-                                    <a href="setEdit.php?id=<?= $set->id ?>" class="btn btn-primary">Edit</a>
-                                    <!-- de button in de kaart voor de deletepagina-->
-                                    <a href="setDelete.php?id=<?= $set->id ?>" class="btn btn-primary">Delete</a>
+                ?>
+
+                <div class="row justify-content-center g-4 mt-1">
+                    <?php
+                    if ($sets) {
+                        foreach ($sets as $set) { ?>
+                            <div class="col-11 col-sm-6 col-md-4 col-lg-3">
+                                <!-- maakt een card voor elke set -->
+                                <div class="card h-100 set-card">
+                                    <!-- voor de foto van de set -->
+                                    <div class="set-card-img-wrap">
+                                        <img src="../upload/<?= $set->image ?>" class="set-card-img" alt="<?= $set->name ?>">
+                                    </div>
+                                    <!-- voor de blog informatie -->
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title"><?= $set->name ?></h5>
+                                        <div class="mt-auto d-flex gap-2">
+                                            <a href="setEdit.php?id=<?= $set->id ?>" class="btn btn-primary flex-fill">Edit</a>
+                                            <a href="setDelete.php?id=<?= $set->id ?>" class="btn btn-outline-danger flex-fill">Delete</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <br>
-                    <?php }
-                } ?>
-                <div>
-                    <!-- dit is voor de achtergrond-->
-                    <?php
-                    $backgroundImage =
-                        // De achtergrond foto
-                        '../images/sand-2005066_1280.jpg';
-                    ?>
-                    <style>
-                        body {
-                            background: #0d1820;
-                            background-image: radial-gradient(circle at 48% 90%, rgba(151, 168, 66, 0.4), transparent 30%);
-                        }
-                    </style>
+                        <?php }
+                    } ?>
                 </div>
 
     </body>
