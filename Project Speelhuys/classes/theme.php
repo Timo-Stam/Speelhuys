@@ -4,7 +4,7 @@ class Theme
     public int $id;
     public string $name;
 
-    // de functie om alleblogs op te halen
+    // de functie om alle themas op te halen
     public static function findAllThemes()
     {
         // connectie met database starten

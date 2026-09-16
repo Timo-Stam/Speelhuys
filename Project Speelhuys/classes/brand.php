@@ -65,7 +65,7 @@ class Brand
             //terug geven zodat het gebruikt kan worden
             //
             $conn->close();
-            //retunt het product
+            //retunt het merk
             return $brand;
         } else {
             //
