@@ -67,6 +67,7 @@ if (isset($_POST["name"])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../css/jquery-te-1.4.0.css">
 </head>
 <div class="text-center mt-3">
 
