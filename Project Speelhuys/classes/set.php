@@ -12,12 +12,12 @@ class Set
     public int $pieces;
     public int $stock;
 
-    // de functie om alleblogs op te halen
+    // de functie om alle sets op te halen
     public static function findAllSets()
     {
         // connectie met database starten
         $conn = Database::start();
-        // vind alle blogs in producten
+        // vind alle sets in producten
         $query = "SELECT * FROM sets";
         $result = $conn->query($query);
         //arrey om alle blogs in te doen
@@ -46,7 +46,6 @@ class Set
             return $sets;
         }
     }
-    // de functie om een specifieken blog tevinden met een blog id
 
     public static function search($keywords, $merk, $thema, $prijs, $leeftijd, $blokken, $limit, $offset)
     {
@@ -124,13 +123,13 @@ class Set
         }
 
         call_user_func_array([$stmt, 'bind_param'], $bindParams);
-
+        //dit haalt alle sets op die aan de filter voldoen
         $stmt->execute();
-
+        //dit stopt alle sets die door de filter zijn gekomen in $result
         $result = $stmt->get_result();
 
         $sets = [];
-
+        //een nieuwe set voor elke set gevonden in de $result
         while ($row = $result->fetch_assoc()) {
             $set = new Set();
             $set->id = $row['set_id'];
@@ -245,15 +244,13 @@ class Set
         $id = mysqli_real_escape_string($conn, $id);
 
         //om te zoeken in de database op naam en wachtwoord
-        //
         $query = "SELECT * FROM sets 
         WHERE set_id = '$id'";
 
+        //alle informatie van de gebruiker ophalen
         $result = $conn->query($query);
 
         if ($result->num_rows > 0) {
-            //alle informatie van de gebruiker ophalen
-            //
             while ($row = $result->fetch_assoc()) {
                 // een nieuw blog aanmaken
                 $set = new Set();
@@ -269,12 +266,11 @@ class Set
                 $set->stock = $row['set_stock'];
             }
             //terug geven zodat het gebruikt kan worden
-            //
             $conn->close();
-            //retunt het product
+            //retunt de set
             return $set;
         } else {
-            //
+            //als er geen sets gevonden zijn
             $conn->close();
             return false;
         }
@@ -318,7 +314,7 @@ class Set
     public function insertSet()
     {
         $conn = Database::start();
-
+        
         $name = mysqli_real_escape_string($conn, $this->name);
         $description = mysqli_real_escape_string($conn, $this->description);
         $brandId = mysqli_real_escape_string($conn, $this->brandId);
