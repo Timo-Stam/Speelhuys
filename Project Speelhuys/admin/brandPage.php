@@ -15,6 +15,7 @@ $session = Session::findSession();
 $userId = $session->userId;
 $user = User::findAdmin($userId);
 $brands = Brand::findAllBrands();
+$currentPage = basename($_SERVER['PHP_SELF']);
 // check om zeker te zijn anders wordt je weggestuurd
 
 if ($session == false) {
@@ -70,8 +71,8 @@ if ($user->role == null) {
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div class="navbar-nav">
                                 <!-- geeft de userid mee om naar de insert tegaan-->
-                                <a class="nav-link active" id="navbarSetsPage"
-                                    href="setPage.php?id=<?= $session->userId ?>">
+                                <a class="btn admin-nav-link <?= in_array($currentPage, ['setPage.php', 'setInsert.php', 'setEdit.php', 'setDelete.php'], true) ? 'active' : '' ?>"
+                                    id="navbarSetsPage" href="setPage.php?id=<?= $session->userId ?>">
                                     <h5>Sets</h5>
                                 </a>
                             </div>
@@ -79,7 +80,8 @@ if ($user->role == null) {
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <!-- de merk tekst boven aan als button om naar de adminpagina tegaan-->
                             <div class="navbar-nav">
-                                <a class="nav-link active" id="navbarbrandPage" href="brandPage.php">
+                                <a class="btn admin-nav-link <?= in_array($currentPage, ['brandPage.php', 'brandInsert.php', 'brandEdit.php', 'brandDelete.php'], true) ? 'active' : '' ?>"
+                                    id="navbarbrandPage" href="brandPage.php">
                                     <h5>Merk</h5>
                                 </a>
                             </div>
@@ -87,15 +89,14 @@ if ($user->role == null) {
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <!-- de thema tekst boven aan als button om naar de adminpagina tegaan-->
                             <div class="navbar-nav">
-                                <a class="nav-link active" id="navbarAdminpage" href="themePage.php">
+                                <a class="btn admin-nav-link <?= in_array($currentPage, ['themePage.php', 'themeInsert.php', 'themeEdit.php', 'themeDelete.php'], true) ? 'active' : '' ?>"
+                                    id="navbarAdminpage" href="themePage.php">
                                     <h5>Thema</h5>
                                 </a>
                             </div>
                         </div>
                         <!--verwelkomende tekst voor de admin-->
-                        <div class="container text-end">
-                            <h4> Welkom tot de website admin</h4>
-                        </div>
+
                         <div class="col-1">
                             <!-- dit is opvulling voor de tekst zodat het in het midden is en niet schuin-->
                         </div>
@@ -119,7 +120,7 @@ if ($user->role == null) {
                             <p>Uw merk is aangepast</p>
                         </div>
                     </div>
-                        <?php
+                    <?php
                 }
                 //alert check om aantegeven dat je geen admin bent
                 if (isset($_GET["adminCheck"])) {
@@ -169,7 +170,7 @@ if ($user->role == null) {
                     </div>
                 <?php }
                 //einde checks
-
+                
                 //de link naar het maken van een merk, nu als knop
                 ?>
                 <div class="mb-3">
@@ -198,8 +199,10 @@ if ($user->role == null) {
                                     <div class="card-body d-flex flex-column">
                                         <h5 class="card-title"><?= $brand->name ?></h5>
                                         <div class="mt-auto d-flex gap-2">
-                                            <a href="brandEdit.php?id=<?= $brand->id ?>" class="btn btn-primary flex-fill">Edit</a>
-                                            <a href="brandDelete.php?id=<?= $brand->id ?>" class="btn btn-outline-danger flex-fill">Delete</a>
+                                            <a href="brandEdit.php?id=<?= $brand->id ?>"
+                                                class="btn btn-primary flex-fill">Edit</a>
+                                            <a href="brandDelete.php?id=<?= $brand->id ?>"
+                                                class="btn btn-outline-danger flex-fill">Delete</a>
                                         </div>
                                     </div>
                                 </div>

@@ -50,6 +50,7 @@ if (isset($_POST["theme"])) {
 <html lang="en">
 
 <head>
+    <?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>form</title>
@@ -85,8 +86,8 @@ if (isset($_POST["theme"])) {
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div class="navbar-nav">
                                 <!-- geeft de userid mee om naar de insert tegaan-->
-                                <a class="nav-link active" id="navbarSetsPage"
-                                    href="setPage.php?id=<?= $session->userId ?>">
+                                <a class="btn admin-nav-link <?= in_array($currentPage, ['setPage.php', 'setInsert.php', 'setEdit.php', 'setDelete.php'], true) ? 'active' : '' ?>"
+                                    id="navbarSetsPage" href="setPage.php?id=<?= $session->userId ?>">
                                     <h5>Sets</h5>
                                 </a>
                             </div>
@@ -94,7 +95,8 @@ if (isset($_POST["theme"])) {
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <!-- de merk tekst boven aan als button om naar de adminpagina tegaan-->
                             <div class="navbar-nav">
-                                <a class="nav-link active" id="navbarbrandPage" href="brandPage.php">
+                                <a class="btn admin-nav-link <?= in_array($currentPage, ['brandPage.php', 'brandInsert.php', 'brandEdit.php', 'brandDelete.php'], true) ? 'active' : '' ?>"
+                                    id="navbarbrandPage" href="brandPage.php">
                                     <h5>Merk</h5>
                                 </a>
                             </div>
@@ -102,15 +104,14 @@ if (isset($_POST["theme"])) {
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <!-- de thema tekst boven aan als button om naar de adminpagina tegaan-->
                             <div class="navbar-nav">
-                                <a class="nav-link active" id="navbarAdminpage" href="themePage.php">
+                                <a class="btn admin-nav-link <?= in_array($currentPage, ['themePage.php', 'themeInsert.php', 'themeEdit.php', 'themeDelete.php'], true) ? 'active' : '' ?>"
+                                    id="navbarAdminpage" href="themePage.php">
                                     <h5>Thema</h5>
                                 </a>
                             </div>
                         </div>
                         <!--verwelkomende tekst voor de admin-->
-                        <div class="container text-end">
-                            <h4> Welkom tot de website admin</h4>
-                        </div>
+
                         <div class="col-1">
                             <!-- dit is opvulling voor de tekst zodat het in het midden is en niet schuin-->
                         </div>

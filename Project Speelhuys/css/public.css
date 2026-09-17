@@ -44,6 +44,24 @@ body {
     color: var(--text) !important;
 }
 
+.admin-nav-link {
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: var(--text) !important;
+    margin: 0.25rem;
+}
+
+.admin-nav-link h5 {
+    margin: 0;
+}
+
+.admin-nav-link:hover,
+.admin-nav-link.active {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #1b1b1b !important;
+}
+
 .btn,
 .page-link,
 .page-item.active .page-link {
