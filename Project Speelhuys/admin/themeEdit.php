@@ -121,7 +121,7 @@ if (isset($_POST["name"])) {
 
                 <div class="col-2">
                     <!-- dit is voor opmaak van de form -->
-                </div>
+                </div> 
                 <div class="col-5 mt-3">
 
                     <!-- begin form voor het editen van de blog-->

@@ -168,7 +168,12 @@ if ($user->role == null) {
                 //einde checks
                 //checkt of er wel sets zijn
                 ?>
-
+                <!-- Knop om nieuwe set toe te voegen -->
+                <div class="mb-3">
+                <a class="btn btn-primary" href="setInsert.php?id=<?= $session->userId ?>">
+                              + Nieuw set toevoegen
+                </a>
+               
                 <div class="row justify-content-center g-4 mt-1">
                     <?php
                     if ($sets) {
