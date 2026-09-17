@@ -102,7 +102,7 @@ if ($user->role == null) {
                     </div>
                 </nav>
                 <!--eind navbar-->
-                <!-- alle checks voor de contole bars-->
+            <!-- alle checks voor de contole bars-->
                 <!--ckeck om te kijken of je net iets hebt geupdate voor een controle bar-->
                 <?php
                 if (isset($_GET["update"])) {
@@ -183,6 +183,7 @@ if ($user->role == null) {
                 ?>
                 <div class="row justify-content-center g-4 mt-1">
                     <?php
+                    //kijkt of er wel merken zijn gegeven
                     if ($brands) {
                         foreach ($brands as $brand) { ?>
                             <div class="col-11 col-sm-6 col-md-4 col-lg-3">
@@ -190,6 +191,7 @@ if ($user->role == null) {
                                 <div class="card h-100 set-card">
                                     <!-- voor het logo van het merk -->
                                     <div class="brand-card-img-wrap">
+                                        <!--logo foto-->
                                         <img src="../upload/<?= $brand->image ?>" class="brand-card-img" alt="<?= $brand->name ?>">
                                     </div>
                                     <!-- voor de merk informatie-->

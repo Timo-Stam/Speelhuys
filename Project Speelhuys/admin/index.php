@@ -38,10 +38,11 @@
 
             <div class="content-area">
                 <?php
+                //als iemand deze knop drukt gaat hij naar de overzicht pagina voor gebruikers
                 if (isset($_POST["userBtn"])) {
                     header("location: ../user/overview.php");
                 }
-
+                //kijkt of alles is ingevuld
                 if (isset($_POST['username']) && ($_POST['password'])) {
                     include "../classes/session.php";
                     include "../classes/user.php";
@@ -51,6 +52,7 @@
                     $password = $_POST["password"];
 
                     $user = User::findUser($username, $password);
+                    //als er een gebruiker wordt gevonden met de juiste gegevens wordt er een cookie aan gemaakt en meegegeven
                     if ($user) {
                         $key = md5(uniqid(rand(), true));
 
@@ -124,7 +126,7 @@
                                         log in als admin
                                     </button>
                                 </form>
-
+                                <!-- de knop voor gebruikers-->
                                 <form method="POST">
                                     <button type="submit" name="userBtn" class="btn btn-outline-light w-100">
                                         Ik ben geen admin
