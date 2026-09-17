@@ -37,6 +37,7 @@ $themeColors = ['#f4d35e', '#97a842', '#5eb1f4', '#e07a5f', '#a05ef4', '#5ef4b1'
 <html lang="en">
 
 <head>
+    <?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>form</title>
@@ -73,8 +74,8 @@ $themeColors = ['#f4d35e', '#97a842', '#5eb1f4', '#e07a5f', '#a05ef4', '#5ef4b1'
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div class="navbar-nav">
                                 <!-- geeft de userid mee om naar de insert tegaan-->
-                                <a class="nav-link active" id="navbarBlogMakingPage"
-                                    href="setPage.php?id=<?= $session->userId ?>">
+                                <a class="btn admin-nav-link <?= in_array($currentPage, ['setPage.php', 'setInsert.php', 'setEdit.php', 'setDelete.php'], true) ? 'active' : '' ?>"
+                                    id="navbarBlogMakingPage" href="setPage.php?id=<?= $session->userId ?>">
                                     <h5>Sets</h5>
                                 </a>
                             </div>
@@ -82,7 +83,8 @@ $themeColors = ['#f4d35e', '#97a842', '#5eb1f4', '#e07a5f', '#a05ef4', '#5ef4b1'
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <!-- de merk tekst boven aan als button om naar de adminpagina tegaan-->
                             <div class="navbar-nav">
-                                <a class="nav-link active" id="navbarAdminpage" href="brandPage.php">
+                                <a class="btn admin-nav-link <?= in_array($currentPage, ['brandPage.php', 'brandInsert.php', 'brandEdit.php', 'brandDelete.php'], true) ? 'active' : '' ?>"
+                                    id="navbarAdminpage" href="brandPage.php">
                                     <h5>Merk</h5>
                                 </a>
                             </div>
@@ -90,15 +92,14 @@ $themeColors = ['#f4d35e', '#97a842', '#5eb1f4', '#e07a5f', '#a05ef4', '#5ef4b1'
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <!-- de thema tekst boven aan als button om naar de adminpagina tegaan-->
                             <div class="navbar-nav">
-                                <a class="nav-link active" id="navbarAdminpage" href="themePage.php">
+                                <a class="btn admin-nav-link <?= in_array($currentPage, ['themePage.php', 'themeInsert.php', 'themeEdit.php', 'themeDelete.php'], true) ? 'active' : '' ?>"
+                                    id="navbarAdminpage" href="themePage.php">
                                     <h5>Thema</h5>
                                 </a>
                             </div>
                         </div>
                         <!--verwelkomende tekst voor de admin-->
-                        <div class="container text-end">
-                            <h4> Welkom tot de website admin</h4>
-                        </div>
+
                         <div class="col-1">
                             <!-- dit is opvulling voor de tekst zodat het in het midden is en niet schuin-->
                         </div>
@@ -171,7 +172,7 @@ $themeColors = ['#f4d35e', '#97a842', '#5eb1f4', '#e07a5f', '#a05ef4', '#5ef4b1'
                     </div>
                 <?php }
                 //einde checks
-
+                
                 //de link naar het maken van een thema, nu als knop
                 ?>
                 <div class="mb-3">
@@ -200,8 +201,10 @@ $themeColors = ['#f4d35e', '#97a842', '#5eb1f4', '#e07a5f', '#a05ef4', '#5ef4b1'
                                         <div class="theme-icon" style="background-color: <?= $color ?>;"></div>
                                         <h5 class="card-title"><?= $theme->name ?></h5>
                                         <div class="mt-auto d-flex gap-2">
-                                            <a href="themeEdit.php?id=<?= $theme->id ?>" class="btn btn-primary flex-fill">Edit</a>
-                                            <a href="themeDelete.php?id=<?= $theme->id ?>" class="btn btn-outline-danger flex-fill">Delete</a>
+                                            <a href="themeEdit.php?id=<?= $theme->id ?>"
+                                                class="btn btn-primary flex-fill">Edit</a>
+                                            <a href="themeDelete.php?id=<?= $theme->id ?>"
+                                                class="btn btn-outline-danger flex-fill">Delete</a>
                                         </div>
                                     </div>
                                 </div>
